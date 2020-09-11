@@ -31,12 +31,12 @@
 
     - If we try to measure simple digital input of a micro-controller without any precaution for this unknown state then input signal will look like this:
     <p align="center">
-        <img width="460" height="300" src="/assets/without_pullup.gif">
+        <img width="540" height="260" src="/assets/without_pullup.gif">
     </p>
     
     - But if we connect a pull-up resistor at the input of micro-controller then input signal will look something like this:
     <p align="center">
-        <img width="460" height="300" src="/assets/with_pullup.gif">
+        <img width="540" height="260" src="/assets/with_pullup.gif">
     </p>
 
 
