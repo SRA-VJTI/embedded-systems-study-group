@@ -11,13 +11,13 @@
 
 - ### Pull up and Pull Down Resistor:
     - Pull up and Pull Down Resistors are used in digital systems. 
-    - In digital states there are three states:
+    - In digital system there are three states:
     <p align="center">
         <img width="460" height="300" src="/assets/states.png">
     </p>
 
     -  As you can see two obvious states are Logic High and Logic Low. But suppose if we left any pin unconnected/floating then it is said to be tristate or unknown.
-    - Example of this in popular 7432's(OR gate IC) datasheet:
+    - Example of this in popular 7432 OR gate IC's datasheet:
     <p align="center">
         <img width="500" height="184" src="/assets/datasheet_7432.png">
     </p>
@@ -26,7 +26,7 @@
     - Range [0 - 0.8V]: considered as Logic LOW.
     - Range [0.8 - 2V]: considered as indeterminate state.
     <p align="center">
-        <img width="118" height="175" src="/assets/ttl_level.jpeg">
+        <img width="177" height="260" src="/assets/ttl_level.jpeg">
     </p>
 
     - If we try to measure simple digital input of a micro-controller wihtout any precaution for this unknown state then input signal will look like this:
@@ -34,7 +34,7 @@
         <img width="460" height="300" src="/assets/without_pullup.gif">
     </p>
     
-    - But if we connect a pull up resistor at input of micro-controller then input signal will look like this:
+    - But if we connect a pull up resistor at input of micro-controller then input signal will look something like this:
     <p align="center">
         <img width="460" height="300" src="/assets/with_pullup.gif">
     </p>
