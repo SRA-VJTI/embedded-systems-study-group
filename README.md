@@ -26,7 +26,7 @@
     - Range [0 - 0.8V]: considered as Logic LOW.
     - Range [0.8 - 2V]: considered as indeterminate state.
     <p align="center">
-        <img width="118" height="175" src="/assests/ttl_level.jpeg">
+        <img width="118" height="175" src="/assets/ttl_level.jpeg">
     </p>
 
     - If we try to measure simple digital input of a micro-controller wihtout any precaution for this unknown state then input signal will look like this:
