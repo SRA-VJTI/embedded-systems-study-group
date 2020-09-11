@@ -9,14 +9,14 @@
 
 ## Basic of Electronics: 
 
-- ### Pull up and Pull Down Resistor:
-    - Pull up and Pull Down Resistors are used in digital systems. 
-    - In digital system there are three states:
+- ### Pull-Up and Pull-Down Resistor:
+    - Pull-up and Pull-Down Resistors used in digital systems. 
+    - In a digital system, there are three states:
     <p align="center">
         <img width="460" height="300" src="/assets/states.png">
     </p>
 
-    -  As you can see two obvious states are Logic High and Logic Low. But suppose if we left any pin unconnected/floating then it is said to be tristate or unknown.
+    -  Two obvious states are Logic High and Logic Low. But suppose if we left any pin unconnected/floating then it is said to be tristate or unknown.
     - Example of this in popular 7432 OR gate IC's datasheet:
     <p align="center">
         <img width="500" height="184" src="/assets/datasheet_7432.png">
@@ -29,12 +29,12 @@
         <img width="177" height="260" src="/assets/ttl_level.jpeg">
     </p>
 
-    - If we try to measure simple digital input of a micro-controller wihtout any precaution for this unknown state then input signal will look like this:
+    - If we try to measure simple digital input of a micro-controller without any precaution for this unknown state then input signal will look like this:
     <p align="center">
         <img width="460" height="300" src="/assets/without_pullup.gif">
     </p>
     
-    - But if we connect a pull up resistor at input of micro-controller then input signal will look something like this:
+    - But if we connect a pull-up resistor at the input of micro-controller then input signal will look something like this:
     <p align="center">
         <img width="460" height="300" src="/assets/with_pullup.gif">
     </p>
