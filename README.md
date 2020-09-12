@@ -57,4 +57,23 @@
     </p>
 
 
-- ### Flipflops:
+- ### FlipFlops and Latches:
+    - FlipFlops and Latches are the building blocks of most sequential circuits. FlipFlop is a device that samples it's input and changes only when a clock signal changes. On the other hand latches are sequential devices that watch it's inputs continuously and can change its outputs at any time.
+    - ### Latches
+    - ### SR Latch
+        - There are 2 types of SR latches depending on the gates used :-
+            1) SR Latch ( with NOR gates )
+            <p align="center">
+                <img width="540" height="260" src="/assets/SRNorLatch.PNG">
+            </p>
+            
+            2) SR Latch ( with NAND gates )
+            <p align="center">
+                <img width="540" height="260" src="/assets/SRNandLatch.png">
+            </p>
+     - ### SR FlipFlop
+        - One extra signal is used here and it is a control signal like clock signal.
+        <p align="center">
+            <img width="540" height="260" src="/assets/SRFlipFlop.jpg">
+        </p>
+    
