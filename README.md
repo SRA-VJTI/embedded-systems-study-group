@@ -16,6 +16,11 @@
         <img width="460" height="300" src="/assets/switch_debouncer.png">
     </p>
 
+    - Switch Debounce waveform:
+    <p align="center">
+        <img width="460" height="300" src="/assets/debounce_waveform.jpeg">
+    </p>
+
     - Hardware solution:
     <p align="center">
         <img width="540" height="260" src="/assets/hardware_bounce.gif">
