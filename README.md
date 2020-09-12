@@ -3,11 +3,23 @@
 ## Table of Contents
 - [Introduction](#introduction-to-embedded-system)
 - [Basic of Electronics](#basic-of-electronics)
+    - [Switch debouncer](#switch-debouncer)
     - [Pull up and Pull Down Resistor](#pull-up-and-pull-down-resistor)
     - [Flipflops](#flipflops)
 ## Introduction to Embedded System: 
 
 ## Basic of Electronics: 
+
+
+- ### Switch Debouncer:
+    <p align="center">
+        <img width="460" height="300" src="/assets/switch_debouncer.png">
+    </p>
+
+    - Hardware solution:
+    <p align="center">
+        <img width="540" height="260" src="/assets/hardware_bounce.gif">
+    </p>
 
 - ### Pull-Up and Pull-Down Resistor:
     - Pull-up and Pull-Down Resistors used in digital systems. 
