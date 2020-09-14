@@ -2,29 +2,34 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Embedded Systems Study Group | embedded-systems-study-group</title>
+<title>Embedded Systems Study Group</title>
 <meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Embedded Systems Study Group" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/week1/week1.html" />
 <meta property="og:url" content="http://localhost:4000/week1/week1.html" />
-<meta property="og:site_name" content="embedded-systems-study-group" />
+<meta property="og:site_name" content="Embedded Systems Study Group" />
 <script type="application/ld+json">
 {"@type":"WebPage","headline":"Embedded Systems Study Group","url":"http://localhost:4000/week1/week1.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=7879199fc2166044f70d5f3a869e4e2ca798ff88">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="/assets/css/style.css?v=284ac1f835bb10c0ba758731640356e28ba17a33">
   </head>
   <body>
-    <div class="container-lg px-3 my-5 markdown-body">
+    <section class="page-header">
+      <h1 class="project-name">Embedded Systems Study Group</h1>
+      <h2 class="project-tagline"></h2>
       
-      <h1><a href="http://localhost:4000/">embedded-systems-study-group</a></h1>
+        <a href="https://github.com/SRA-VJTI/embedded-systems-study-group" class="btn">View on GitHub</a>
       
+      
+    </section>
 
+    <section class="main-content">
       <h1 id="embedded-systems-study-group">Embedded Systems Study Group</h1>
 
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -107,58 +112,68 @@
     <ul>
       <li>FlipFlops and Latches are the building blocks of most sequential circuits. FlipFlop is a device that samples it’s input and changes only when a clock signal changes. On the other hand latches are sequential devices that watch it’s inputs continuously and can change its outputs at any time.</li>
       <li>
-        <h3 id="latches"><u>Latches</u></h3>
-      </li>
-      <li>
-        <h4 id="sr-latch">SR Latch</h4>
+        <h3 id="latches">Latches</h3>
         <ul>
-          <li>There are 2 types of SR latches depending on the gates used :-
-  1) SR Latch ( with NOR gates )
-            <p align="center">
+          <li>SR Latch
+            <ul>
+              <li>
+                <p>There are 2 types of SR latches depending on the  gates used :-</p>
+
+                <p>1) SR Latch ( with NOR gates )</p>
+                <p align="center">
       <img width="540" height="260" src="/assets/Week1/SRNorLatch.PNG" />
   </p>
 
-            <p>2) SR Latch ( with NAND gates )</p>
-            <p align="center">
+                <p>2) SR Latch ( with NAND gates )</p>
+                <p align="center">
       <img width="540" height="260" src="/assets/Week1/SRNandLatch.png" />
   </p>
+              </li>
+            </ul>
           </li>
         </ul>
       </li>
       <li>
         <h3 id="flipflops">FlipFlops</h3>
-      </li>
-      <li>
-        <h4 id="sr-flipflop">SR FlipFlop</h4>
         <ul>
-          <li>One extra signal is used here and it is a control signal like the clock signal.</li>
-        </ul>
-        <p align="center">
-     <img width="540" height="260" src="/assets/Week1/SRFlipFlop.jpg" />
- </p>
-      </li>
-      <li>
-        <h4 id="d-flipflop">D FlipFlop</h4>
-        <ul>
-          <li>What if we go into the invalid state by mistake??? The data will be lost and we do not want that.<br />
- We can see that if we make S and R complements of each other then the invalid state is removed. That is a problem as we can’t access the S=0 and R=0 state i.e the memory state. What can you do?<br />
- Actually this is not a problem as you have clock signal. If you make the clock signal 0 then you automaticaly go into memory state.</li>
-        </ul>
+          <li>SR FlipFlop
+            <ul>
+              <li>One extra signal is used here and it is a control     signal like the clock signal.</li>
+            </ul>
+            <p align="center">
+      <img width="540" height="260" src="/assets/Week1/SRFlipFlop.jpg" />
+  </p>
+          </li>
+          <li>D FlipFlop
+            <ul>
+              <li>What if we go into the invalid state by mistake???    The data will be lost and we do not want that.<br />
+  We can see that if we make S and R complements of each  other then the invalid state is removed. That is a   problem as we can’t access the S=0 and R=0 state i.e  the memory state. What can you do?<br />
+  Actually this is not a problem as you have clock    signal. If you make the clock signal 0 then you    automaticaly go into memory state.</li>
+            </ul>
 
-        <p align="center">
-     <img width="540" height="260" src="/assets/Week1/DFlipFlop.gif" />
- </p>
+            <p align="center">
+      <img width="540" height="260" src="/assets/Week1/DFlipFlop.gif" />
+  </p>
+          </li>
+        </ul>
       </li>
     </ul>
   </li>
 </ul>
 
+<h3 id="assignment">Assignment</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [Assignment1]()
+</code></pre></div></div>
 
 
-      
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-    <script>anchors.add();</script>
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/SRA-VJTI/embedded-systems-study-group">embedded-systems-study-group</a> is maintained by <a href="https://github.com/SRA-VJTI">SRA-VJTI</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
     
   </body>
 </html>
