@@ -11,7 +11,7 @@
 
 - ### Switch Debouncer:
     <p align="center">
-        <img width="460" height="300" src="/assets/Week1/switch_debouncer.png">
+        <img width="460" height="300" src="embedded-systems-study-group/week1/assets/Week1/switch_debouncer.png">
     </p>
 
     - Switch Debounce waveform:
