@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Embedded Systems Study Group | embedded-systems-study-group</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Embedded Systems Study Group" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/week1/week1.html" />
+<meta property="og:url" content="http://localhost:4000/week1/week1.html" />
+<meta property="og:site_name" content="embedded-systems-study-group" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Embedded Systems Study Group","url":"http://localhost:4000/week1/week1.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=7879199fc2166044f70d5f3a869e4e2ca798ff88">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">embedded-systems-study-group</a></h1>
+      
+
+      <h1 id="embedded-systems-study-group">Embedded Systems Study Group</h1>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#basic-of-electronics">Basic of Electronics</a>
+    <ul>
+      <li><a href="#switch-debouncer">Switch debouncer</a></li>
+      <li><a href="#pull-up-and-pull-down-resistor">Pull up and Pull Down Resistor</a></li>
+      <li><a href="#flipflops-and-latches">Latches and Flipflops</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="basic-of-electronics">Basic of Electronics:</h2>
+
+<ul>
+  <li>
+    <h3 id="switch-debouncer">Switch Debouncer:</h3>
+    <p align="center">
+      <img width="460" height="300" src="/assets/Week1/switch_debouncer.png" />
+  </p>
+
+    <ul>
+      <li>Switch Debounce waveform:</li>
+    </ul>
+    <p align="center">
+      <img width="460" height="300" src="/assets/Week1/debounce_waveform.jpeg" />
+  </p>
+
+    <ul>
+      <li>Hardware solution:</li>
+    </ul>
+    <p align="center">
+      <img width="540" height="260" src="/assets/Week1/hardware_bounce.gif" />
+  </p>
+  </li>
+  <li>
+    <h3 id="pull-up-and-pull-down-resistor">Pull-Up and Pull-Down Resistor:</h3>
+    <ul>
+      <li>Pull-up and Pull-Down Resistors used in digital systems.</li>
+      <li>In a digital system, there are three states:</li>
+    </ul>
+    <p align="center">
+      <img width="460" height="300" src="/assets/Week1/states.png" />
+  </p>
+
+    <ul>
+      <li>Two obvious states are Logic High and Logic Low. But suppose if we left any pin unconnected/floating then it is said to be tristate or unknown.</li>
+      <li>Example of this in popular 7432 OR gate IC’s datasheet:</li>
+    </ul>
+    <p align="center">
+      <img width="500" height="184" src="/assets/Week1/datasheet_7432.png" />
+  </p>
+
+    <ul>
+      <li>Range [2V - 5V]: considered as Logic HIGH.</li>
+      <li>Range [0 - 0.8V]: considered as Logic LOW.</li>
+      <li>Range [0.8 - 2V]: considered as indeterminate state.</li>
+    </ul>
+    <p align="center">
+      <img width="177" height="260" src="/assets/Week1/ttl_level.jpeg" />
+  </p>
+
+    <ul>
+      <li>If we try to measure simple digital input of a micro-controller without any precaution for this unknown state then input signal will look like this:</li>
+    </ul>
+    <p align="center">
+      <img width="540" height="260" src="/assets/Week1/without_pullup.gif" />
+  </p>
+
+    <ul>
+      <li>But if we connect a pull-up resistor at the input of micro-controller then input signal will look something like this:</li>
+    </ul>
+    <p align="center">
+      <img width="540" height="260" src="/assets/Week1/with_pullup.gif" />
+  </p>
+  </li>
+  <li>
+    <h3 id="flipflops-and-latches">FlipFlops and Latches:</h3>
+    <ul>
+      <li>FlipFlops and Latches are the building blocks of most sequential circuits. FlipFlop is a device that samples it’s input and changes only when a clock signal changes. On the other hand latches are sequential devices that watch it’s inputs continuously and can change its outputs at any time.</li>
+      <li>
+        <h3 id="latches"><u>Latches</u></h3>
+      </li>
+      <li>
+        <h4 id="sr-latch">SR Latch</h4>
+        <ul>
+          <li>There are 2 types of SR latches depending on the gates used :-
+  1) SR Latch ( with NOR gates )
+            <p align="center">
+      <img width="540" height="260" src="/assets/Week1/SRNorLatch.PNG" />
+  </p>
+
+            <p>2) SR Latch ( with NAND gates )</p>
+            <p align="center">
+      <img width="540" height="260" src="/assets/Week1/SRNandLatch.png" />
+  </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3 id="flipflops">FlipFlops</h3>
+      </li>
+      <li>
+        <h4 id="sr-flipflop">SR FlipFlop</h4>
+        <ul>
+          <li>One extra signal is used here and it is a control signal like the clock signal.</li>
+        </ul>
+        <p align="center">
+     <img width="540" height="260" src="/assets/Week1/SRFlipFlop.jpg" />
+ </p>
+      </li>
+      <li>
+        <h4 id="d-flipflop">D FlipFlop</h4>
+        <ul>
+          <li>What if we go into the invalid state by mistake??? The data will be lost and we do not want that.<br />
+ We can see that if we make S and R complements of each other then the invalid state is removed. That is a problem as we can’t access the S=0 and R=0 state i.e the memory state. What can you do?<br />
+ Actually this is not a problem as you have clock signal. If you make the clock signal 0 then you automaticaly go into memory state.</li>
+        </ul>
+
+        <p align="center">
+     <img width="540" height="260" src="/assets/Week1/DFlipFlop.gif" />
+ </p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>
