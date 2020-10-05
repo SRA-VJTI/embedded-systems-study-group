@@ -1,12 +1,14 @@
 #  Embedded Systems Study Group
 
-## Table of Contents
-- [Week 1](week1/week1.md)
-    * [Basic of Electronics](week1/week1.md#basic-of-electronics)
-        - [Switch debouncer](week1/week1.html#switch-debouncer)
-        - [Pull up and Pull Down Resistor](week1/week1.html#pull-up-and-pull-down-resistor)
-        - [Flipflops and Latches](week1/week1.html#flipflops-and-latches)
+<details>
+<summary><a href="week1/week1.md">Week 1</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;Add summary
+</details>
 
+<details>
+<summary><a href="week2/week2.md">Week 2</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;Add summary
+</details>
 
 ## Conducted by
 - [Sravan Chittupalli](https://github.com/SravanChittupalli)
