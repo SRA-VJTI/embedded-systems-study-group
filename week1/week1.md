@@ -87,4 +87,4 @@
             </p>
     
 ### Assignment
-   - [Assignment1](https://classroom.google.com/u/0/c/MTY0MDg3OTE4MDg3/a/MTY0NTAwNzA5OTE2/details)
+   - [Assignment1](https://github.com/SRA-VJTI/embedded-systems-study-group/blob/master/assets/Week1/Embedded_Assignment%201.pdf)
