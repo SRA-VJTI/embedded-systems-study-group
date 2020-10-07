@@ -224,7 +224,7 @@ Now, we can run the generated binary: `./main` and then output will be `23`.
 
 - we learnt about .c and .h files, so what are .o files ??
 - .o file means `object file`, Contains the compiled contents of the corresponding .c program, compiled as in assembly form.
-- Lets take example described [here](https://github.com/VedantParanjape/idf-notes-sra/tree/master/01), copy the files to your system, namely main.c, library.c and library.h. 
+- Lets take example described [here](../assets/week2/code1.zip), Download the zip and cd into the extracted directory.  
 - The command to compile was `gcc main.c library.c`, this was as we need to combine function in library.c and main.c for the program to run, if we only compile main.c, there's only declaration of `welcome_user`, but a definiton is missing, i.e. compiler doesn't know what it needs to do when `welcome_user` function is called. So we need to link these to files together. `gcc main.c library.c` automatically does that for us.
 - Other way to do this is compile the respective .c files in its object file and then link them together.
 
@@ -355,7 +355,7 @@ Well Cmake is a build system generator which is used to generate projects over d
 
 Just like GNU Make had a file where can describe the steps of compilation, similarly we have to write a cmake file. We will use cmake to compile code in the above example.
 
-Download the following folder on your system: https://github.com/VedantParanjape/idf-notes-sra/tree/master/06
+Download the following [zip](../assets/week2/code2.zip), extract it and cd into the folder.
 
 Following is the CMakeLists.txt present in the folder
 
