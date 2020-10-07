@@ -1,13 +1,11 @@
 #  Embedded Systems Study Group
 
-## Table of Contents
 - [Basic of Electronics](#basic-of-electronics)
     - [Switch debouncer](#switch-debouncer)
     - [Pull up and Pull Down Resistor](#pull-up-and-pull-down-resistor)
     - [Latches and Flipflops](#flipflops-and-latches)
 
-## Basic of Electronics: 
-
+## Basic of Electronics
 
 - ### Switch Debouncer:
     <p align="center">
