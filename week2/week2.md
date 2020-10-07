@@ -10,6 +10,9 @@
     - [Header files](#header-files)
     - [Object and source files in C: .o and .c](#object-and-source-files-in-c-o-and-c)
     - [Brief overview of GNU Make and CMake build systems](#brief-overview-of-gnu-make-and-cmake-build-systems)
+      - [GNU Make](#gnu-make)
+      - [CMake](#cmake)
+- [CMake](#cmake-1)
     - [Memory allocation in C](#memory-allocation-in-c)
       - [Static](#static)
       - [Automatic](#automatic)
@@ -231,6 +234,159 @@ Now, we can run the generated binary: `./main` and then output will be `23`.
 - `gcc main.o library.o -o main` now we can see we passed both the .o files to the compiler, it merged them and formed a single binary, same process take place even for 1000s of files.
 
 ### Brief overview of GNU Make and CMake build systems
+
+#### GNU Make
+
+detailed tutorial: https://opensource.com/article/18/8/what-how-makefile
+
+- **Make** is a build automation tool that automatically builds executable programs and libraries from source code by reading files called Make files which specify how to derive the target program.
+- A **makefile** is a special file, containing shell commands, that you create and name it as makefile (or Makefile depending upon the system). These rules tell the system what commands you want to be executed. Most times, these rules are commands to compile(or recompile) a series of files
+- We define rules about what how make should generate bash commands to execute required functionality
+
+- below is the syntax of a typical rule:
+
+```Makefile
+target: prerequisites
+<TAB> recipe
+```
+
+- target is just a name of the task, prerequisites is the files or anything necessary to complete that task, recipe is the actual process that must be executed to complete the task, it contains the actual command line commands. recipe is printed as well as executed, so add a @ before the command to suppress it
+
+- Basic Example: Just prints hello world
+
+```Makefile
+say_hello:
+        echo "Hello World"
+```
+
+command will not be displayed
+
+```Makefile
+say_hello:
+        @echo "Hello World"
+```
+
+- As an example, a target might be a binary file that depends on prerequisites (source files). On the other hand, a prerequisite can also be a target that depends on other dependencies, as we saw if we use multiple .c file we need to generate the corresponding .o files to generate the binary.
+- If multiple rules in a makefile, first one is the default one and executed on calling `make`
+- theres's a thing called phony targets, Good examples for this are the common targets "clean" and "all". Chances are this isn't the case, but you may potentially have a file named clean in your main directory. In such a case Make will be confused because by default the clean target would be associated with this file and Make will only run it when the file doesn't appear to be up-to-date with regards to its dependencies. remember we do `make clean` or `make flash` in esp idf. these are different targets. we use `.PHONY = <name of target>` to declare phony tasks
+- let's write a makefile to compile the code in earlier section.
+
+```Makefile
+.PHONY = clean
+```
+
+Added the clean task as a phony task
+
+```Makefile
+main: library main
+		@echo "linking main.o and library.o and generating binary"
+		gcc -o library library.o main.o
+```
+
+main is the task name, and it is the default task. library and main are prerequisite tasks, need to be run before we can run this task. Since generating a binary needs .o files, so it will call the respective tasks which will generate .o files for the given .c files.
+
+```Makefile
+library: library.c
+		@echo "compiling library.c into .object file"
+		gcc -c library.c
+```
+
+```Makefile
+main: main.c
+		@echo "compiling main.c into .object file"
+		gcc -c main.c
+```
+
+library and main tasks generates .o files, as we can see the command is `gcc -c main.c`
+
+```Makefile
+clean: 
+		@echo "cleaning build files"
+		rm main.o library.o library
+```
+
+This task is called by `make clean` and cleans all the generated .o and binary files
+
+- So now we can see library.o main.o and library files are generated only on executing `make`
+- Make is more of a general tool, but not specifically for any language, next we see CMake, which is more C++ agnostic, it has certain very useful features.
+
+Following is the code for compiling the code:
+
+```Makefile
+.PHONY = clean
+
+main: library.o main.o
+		@echo "linking main.o and library.o and generating binary"
+		gcc -o library library.o main.o
+
+library.o: library.c
+		@echo "compiling library.c into .object file"
+		gcc -c library.c
+
+main.o: main.c
+		@echo "compiling main.c into .object file"
+		gcc -c main.c
+
+clean: 
+		@echo "cleaning build files"
+		rm main.o library.o library
+```
+
+#### CMake
+
+# CMake
+
+CMake is an extensible, open-source system that manages the build process in an operating system and in a compiler-independent manner.  
+
+- CMake is much more high-level. It's tailored to compile C++, for which you write much less build code, but can be also used for general purpose build. make has some built-in C/C++ rules as well, but they are mostly useless.
+
+- CMake does a two-step build: it generates a low-level build script in ninja or make or many other generators, and then you run it. All the shell script pieces that are normally piled into Makefile are only executed at the generation stage. Thus, CMake build can be orders of magnitude faster.
+
+- The grammar of CMake is much easier to support for external tools than make's.
+
+[Content](https://tuannguyen68.gitbooks.io/learning-cmake-a-beginner-s-guide/content/chap1/chap1.html)
+
+Well Cmake is a build system generator which is used to generate projects over different platforms whether its be Linux, MacOS or Windows. Cmake is known as build system generator because it can generate projects using different available compilers like GCC , Clang and MSVC. CMake is able to do so because it has its own domain specific language (DSL) which allows us to generate platform-native build systems with the same set of CMake scripts. CMake scripts are always written in a file named as CMakeLists.txt . The CMake software toolset gives developers full control over the whole life cycle of a given project:
+
+- CMake let’s you describe how your project, whether building an executable, libraries, or both, has to be configured, built, and installed on all major hardware and operating systems.
+- CTest allows you to define tests, test suites, and set how they should be executed.
+- CPack offers a DSL for all your packaging needs, whether your project should be bundled and distributed in source code or platform-native binary form.
+- CDash will be useful for reporting the results of tests for your project to an online dashboard.
+
+Just like GNU Make had a file where can describe the steps of compilation, similarly we have to write a cmake file. We will use cmake to compile code in the above example.
+
+Download the following folder on your system: https://github.com/VedantParanjape/idf-notes-sra/tree/master/06
+
+Following is the CMakeLists.txt present in the folder
+
+```cmake
+# Specify the minimum version for CMake
+cmake_minimum_required(VERSION 2.8)
+
+# Project's name
+project(hello)
+
+# Set the output folder where your program will be created
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+# The following folder will be included
+include_directories("${PROJECT_SOURCE_DIR}/include")
+
+# add the files which are needed to generate the binary and also the name of the binary
+add_executable(library ${PROJECT_SOURCE_DIR}/main.c ${PROJECT_SOURCE_DIR}/string_add.c ${PROJECT_SOURCE_DIR}/library.c)
+```
+
+Now to compile we follow the following steps:
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+Now you can see in the root directory that a `/bin` folder has been generated, it contains the generated binary. Run and see it work.
 
 ### Memory allocation in C
 
