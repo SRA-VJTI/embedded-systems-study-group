@@ -334,8 +334,6 @@ clean:
 
 #### CMake
 
-# CMake
-
 CMake is an extensible, open-source system that manages the build process in an operating system and in a compiler-independent manner.  
 
 - CMake is much more high-level. It's tailored to compile C++, for which you write much less build code, but can be also used for general purpose build. make has some built-in C/C++ rules as well, but they are mostly useless.
