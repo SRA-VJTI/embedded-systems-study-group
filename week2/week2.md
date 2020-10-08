@@ -1,22 +1,21 @@
 # Embedded Systems Study Group
 
 - [Embedded Systems Study Group](#embedded-systems-study-group)
-  - [Basics of Embedded Programming](#basics-of-embedded-programming)
-    - [Working of C compiler](#working-of-c-compiler)
-      - [Preprocessors](#preprocessors)
-      - [Compiling](#compiling)
-      - [Assembly](#assembly)
-      - [Linking](#linking)
-    - [Header files](#header-files)
-    - [Object and source files in C: .o and .c](#object-and-source-files-in-c-o-and-c)
-    - [Brief overview of GNU Make and CMake build systems](#brief-overview-of-gnu-make-and-cmake-build-systems)
-      - [GNU Make](#gnu-make)
-      - [CMake](#cmake)
-- [CMake](#cmake-1)
-    - [Memory allocation in C](#memory-allocation-in-c)
-      - [Static](#static)
-      - [Automatic](#automatic)
-      - [Dynamic](#dynamic)
+	- [Basics of Embedded Programming](#basics-of-embedded-programming)
+		- [Working of C compiler](#working-of-c-compiler)
+			- [Preprocessors](#preprocessors)
+			- [Compiling](#compiling)
+			- [Assembly](#assembly)
+			- [Linking](#linking)
+		- [Header files](#header-files)
+		- [Object and source files in C: .o and .c](#object-and-source-files-in-c-o-and-c)
+		- [Brief overview of GNU Make and CMake build systems](#brief-overview-of-gnu-make-and-cmake-build-systems)
+			- [GNU Make](#gnu-make)
+			- [CMake](#cmake)
+		- [Memory allocation in C](#memory-allocation-in-c)
+			- [Static](#static)
+			- [Automatic](#automatic)
+			- [Dynamic](#dynamic)
 
 ## Basics of Embedded Programming
 
@@ -388,6 +387,79 @@ Now you can see in the root directory that a `/bin` folder has been generated, i
 
 ### Memory allocation in C
 
-#### Static 
+#### Static
+
+Static allocation is what happens when you declare a static or global variable. Each static or global variable defines one block of space, of a fixed size. The space is allocated once, when your program is started (part of the exec operation), and is never freed.
+
+```c
+#include<stdio.h> 
+int fun() 
+{ 
+  static int count = 0; 
+  count++; 
+  return count; 
+} 
+   
+int main() 
+{ 
+  printf("%d ", fun()); 
+  printf("%d ", fun()); 
+  return 0; 
+}
+```
+
+If you run this program, you will see something unexpected.
+
 #### Automatic
+
+Automatic allocation happens when you declare an automatic variable, such as a function argument or a local variable. The space for an automatic variable is allocated when the compound statement containing the declaration is entered, and is freed when that compound statement is exited.
+
+Example of this allocation is when we declare the size of an array during run time. Inshort compiler doesn't know the actual size of array during compile time
+
+Note that that the size of the array is declared (and known) before the declaration of the array:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int number_of_elems = 0;
+    printf("enter number of elems: ");
+    scanf("%d", &number_of_elems);
+    
+    char arr[number_of_elems];
+    
+    printf("size: %lu", sizeof(arr));
+    return 0;
+}
+```
+
+The compiler now inserts assembler code to reserve space on the stack for the array, something like (pseudo assembler):
+
+```x86asm
+add sp, number_of_elems*sizeof_int
+```
+
 #### Dynamic
+
+Dynamic memory allocation is a technique in which programs determine as they are running where to store some information. You need dynamic allocation when the amount of memory you need, or how long you continue to need it, depends on factors that are not known before the program runs.
+
+For example, you may need a block to store a line read from an input file; since there is no limit to how long a line can be, you must allocate the memory dynamically and make it dynamically larger as you read more of the line.
+
+Or, you may need a block for each record or each definition in the input data; since you can’t know in advance how many there will be, you must allocate a new block for each record or definition as you read it.
+
+When you use dynamic allocation, the allocation of a block of memory is an action that the program requests explicitly. You call a function or macro when you want to allocate space, and specify the size with an argument. If you want to free the space, you do so by calling another function or macro. You can do these things whenever you want, as often as you want.
+
+Dynamic allocation is not supported by C variables; there is no storage class “dynamic”, and there can never be a C variable whose value is stored in dynamically allocated space. The only way to get dynamically allocated memory is via a system call (which is generally via a GNU C Library function call), and the only way to refer to dynamically allocated space is through a pointer. Because it is less convenient, and because the actual process of dynamic allocation requires more computation time, programmers generally use dynamic allocation only when neither static nor automatic allocation will serve.
+
+For example, if you want to allocate dynamically some space to hold a struct foobar, you cannot declare a variable of type struct foobar whose contents are the dynamically allocated space. But you can declare a variable of pointer type struct foobar * and assign it the address of the space. Then you can use the operators ‘*’ and ‘->’ on this pointer variable to refer to the contents of the space:
+
+```c
+{
+  struct foobar *ptr
+     = (struct foobar *) malloc (sizeof (struct foobar));
+  ptr->name = x;
+  ptr->next = current_foobar;
+  current_foobar = ptr;
+}
+```
