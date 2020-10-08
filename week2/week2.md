@@ -33,7 +33,7 @@ All preprocessor commands begin with a hash symbol (#). It must be the first non
 - we define macro using `#define <identifier> <value or function definition>`
 - So, what happens is, say we have `#define maxvalue 3`, so if in my code, I write maxvalue anywhere, it will be simply replaced by the value, so in this case `3`
 
-```C
+```c
 #include <stdio.h>
 
 #define AGE 23
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
 So, it is as good as writing:
 
-```C
+```c
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
 23 got copied in place of AGE. below is a example of a function
 
-```C
+```c
 #include <stdio.h>
 
 #define SUM(x, y) (x + y)
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 
 So, it is as good as writing:
 
-```C
+```c
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 
 GCC also has a functionality such that we can pass values of macros at compile time, using `-D` parameter to the compiler. Lets consider the following code
 
-```C
+```c
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -115,7 +115,7 @@ Generally file format of asm files is `.s` or `.asm`, and it varies according to
 
 So, lets convert our code to assembly. So for this we can use `-S` argument of the gcc compiler. Copy the following code to main.c
 
-```C
+```c
 #include <stdio.h>
 
 #define AGE 23
@@ -244,7 +244,7 @@ detailed tutorial: https://opensource.com/article/18/8/what-how-makefile
 
 - below is the syntax of a typical rule:
 
-```Makefile
+```makefile
 target: prerequisites
 <TAB> recipe
 ```
@@ -253,14 +253,14 @@ target: prerequisites
 
 - Basic Example: Just prints hello world
 
-```Makefile
+```makefile
 say_hello:
         echo "Hello World"
 ```
 
 command will not be displayed
 
-```Makefile
+```makefile
 say_hello:
         @echo "Hello World"
 ```
@@ -270,13 +270,13 @@ say_hello:
 - theres's a thing called phony targets, Good examples for this are the common targets "clean" and "all". Chances are this isn't the case, but you may potentially have a file named clean in your main directory. In such a case Make will be confused because by default the clean target would be associated with this file and Make will only run it when the file doesn't appear to be up-to-date with regards to its dependencies. remember we do `make clean` or `make flash` in esp idf. these are different targets. we use `.PHONY = <name of target>` to declare phony tasks
 - let's write a makefile to compile the code in earlier section.
 
-```Makefile
+```makefile
 .PHONY = clean
 ```
 
 Added the clean task as a phony task
 
-```Makefile
+```makefile
 main: library main
 		@echo "linking main.o and library.o and generating binary"
 		gcc -o library library.o main.o
@@ -284,13 +284,13 @@ main: library main
 
 main is the task name, and it is the default task. library and main are prerequisite tasks, need to be run before we can run this task. Since generating a binary needs .o files, so it will call the respective tasks which will generate .o files for the given .c files.
 
-```Makefile
+```makefile
 library: library.c
 		@echo "compiling library.c into .object file"
 		gcc -c library.c
 ```
 
-```Makefile
+```makefile
 main: main.c
 		@echo "compiling main.c into .object file"
 		gcc -c main.c
@@ -298,7 +298,7 @@ main: main.c
 
 library and main tasks generates .o files, as we can see the command is `gcc -c main.c`
 
-```Makefile
+```makefile
 clean: 
 		@echo "cleaning build files"
 		rm main.o library.o library
@@ -311,7 +311,7 @@ This task is called by `make clean` and cleans all the generated .o and binary f
 
 Following is the code for compiling the code:
 
-```Makefile
+```makefile
 .PHONY = clean
 
 main: library.o main.o
