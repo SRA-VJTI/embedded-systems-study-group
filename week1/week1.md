@@ -85,4 +85,4 @@
             </p>
     
 ### Assignment
-   - [Assignment1](https://github.com/SRA-VJTI/embedded-systems-study-group/blob/master/assets/week1/Embedded_Assignment%201.pdf)
+   - [Assignment 1](../assets/week1/embedded_assignment_1.pdf)
