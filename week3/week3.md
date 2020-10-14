@@ -1,7 +1,7 @@
 # Embedded Systems Study Group
 
 - [PWM](#pwm)
-- [L298N Motor Driver](#L298n-motor-driver)
+- [L298N Motor Driver](#l298n-motor-driver)
     - [Proteus Simulation](#proteus-simulation)
 - [Memory Allocation in C](#memory-allocation-in-c)
     - [Text Segment](#text-segment)
@@ -22,9 +22,9 @@
 
 - As you can see for 50% duty cycle, on time = off time. So **formula of Duty cycle is (Ton/T)\*100 %**
 - Application of PWM:
-1. Control Speed of motors
-2. Control dimming of RGB LEDs
-3. Control the position of Servos
+    1. Control Speed of motors
+    2. Control dimming of RGB LEDs
+    3. Control the position of Servos
 - Let's see How PWM is used to control motor direction.
 
 ## L298N Motor Driver
@@ -36,15 +36,15 @@
 </p>
 
 - Each channel has three control signals to control motor direction and speed which are:
-1. IN1 AND IN2: These are directional pins
-2. PWMA: This pin is used for controlling speed of motor 
+    1. IN1 AND IN2: These are directional pins
+    2. PWMA: This pin is used for controlling speed of motor 
 - Examples:
 1. Forward Motion of motor:
-- IN1: HIGH && IN2: LOW
-- PWMA: Speed will be dependent on this signal, if PWMA is HIGH then motor will move at maximum speed in forward direction. For 50 % duty cycle motors will run at half speed in forward direction.
+    - IN1: HIGH && IN2: LOW
+    - PWMA: Speed will be dependent on this signal, if PWMA is HIGH then motor will move at maximum speed in forward direction. For 50 % duty cycle motors will run at half speed in forward direction.
 2. Backword Motion of motor:
-- IN1: LOW && IN2: HIGH
-- PWMA: Speed will be dependent on this signal, if PWMA is HIGH then motor will move at maximum speed in backward direction.
+    - IN1: LOW && IN2: HIGH
+    - PWMA: Speed will be dependent on this signal, if PWMA is HIGH then motor will move at maximum speed in backward direction.
 
 <p align="center">
     <img width="560" height="320" src="../assets/week3/basic_h_bridge.png">
