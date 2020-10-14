@@ -4,6 +4,10 @@
     - [Text Segment](#text-segment)
     - [Stack](#stack)
     - [Heap](#heap)
+- [Types of memory in Embedded Systems](#types-of-memory-in-embedded-systems)
+    - [Types Of RAM](#types-of-ram)
+    - [Types Of ROM](#types-of-rom)
+    - [Types Of Hybrid](#types-of-hybrid)
 
 ## Memory Allocation in C
 When any program is loaded into the memory, it is organised into three parts called segments, which are:
@@ -82,5 +86,41 @@ The variable `x` is static storage, because of its global nature. Both `y` and `
 
 
 
-GENERAL POINTS  
+#### NOTE
 You can use the stack if you know exactly how much data you need to allocate before compile time and it is not too big. You can use heap if you don't know exactly how much data you will need at runtime or if you need to allocate a lot of data.
+
+## Types of Memory in Embedded Systems
+Now we have seen how data is stored in memory but we have not seen about the different types of memory available. You can see that all types of data do not require a single type of memory i.e some need to be permanently stored and other can be discarded.
+
+<p align="center">
+    <img width="880" height="350" src="../assets/week3/types_of_memory.gif">
+</p>
+
+### Types Of RAM
+
+The RAM family includes two important memory devices: static RAM (SRAM) and dynamic RAM (DRAM). The primary difference between them is the lifetime of the data they store. SRAM retains its contents as long as electrical power is applied to the chip. If the power is turned off or lost temporarily, its contents will be lost forever. DRAM, on the other hand, has an extremely short data lifetime-typically about four milliseconds. This is true even when power is applied constantly. There is a hardware known as DRAM controller whose job is to periodically refresh the memory.
+
+SRAM devices offer extremely fast access times (approximately four times faster than DRAM) but are much more expensive to produce. Generally, SRAM is used only where access speed is extremely important. A lower cost-per-byte makes DRAM attractive whenever large amounts of RAM are required. Many embedded systems include both types: a small block of SRAM (a few kilobytes) along a critical data path and a much larger block of DRAM (perhaps even Megabytes) for everything else.
+
+### Types Of ROM
+
+Memories in the ROM family are distinguished by the methods used to write new data to them (usually called programming), and the number of times they can be rewritten. This classification reflects the evolution of ROM devices from hardwired to programmable to erasable-and-programmable. A common feature of all these devices is their ability to retain data and programs forever, even during a power failure.
+
+The very first ROMs(masked ROM's) were hardwired devices that contained a preprogrammed set of data or instructions. 
+<p align="center">
+    <img width="680" height="550" src="../assets/week3/rom.gif">
+</p>
+
+In masked ROM even if you want to change just one bit og data you will have to buy a new one.
+
+One step up from the masked ROM is the PROM (programmable ROM), which is purchased in an unprogrammed state. If you were to look at the contents of an unprogrammed PROM, you would see that the data is made up entirely of 1's. The process of writing your data to the PROM involves a special piece of equipment called a device programmer. The device programmer writes data to the device one word at a time by applying an electrical charge to the input pins of the chip. Once a PROM has been programmed in this way, its contents can never be changed.
+
+An EPROM (erasable-and-programmable ROM) is programmed in exactly the same manner as a PROM. However, EPROMs can be erased and reprogrammed repeatedly. To erase an EPROM, you simply expose the device to a strong source of ultraviolet light. (A window in the top of the device allows the light to reach the silicon.) By doing this, you essentially reset the entire chip to its initial--unprogrammed--state. Though more expensive than PROMs, their ability to be reprogrammed makes EPROMs an essential part of the software development and testing process.
+
+### Types of Hybrid
+
+As memory technology has matured in recent years, the line between RAM and ROM has blurred. We take the best out of the two worlds i.e storing capacity of ROM and reprogramable property of RAM. 
+
+EEPROMs are electrically-erasable-and-programmable. Internally, they are similar to EPROMs, but the erase operation is accomplished electrically, rather than by exposure to ultraviolet light. Any byte within an EEPROM may be erased and rewritten. Once written, the new data will remain in the device forever--or at least until it is electrically erased. Obviously the cost is higher.
+
+Flash memory combines the best features of the memory devices described thus far. Flash memory devices are high density, low cost, nonvolatile, fast (to read, but not to write), and electrically reprogrammable. These advantages are overwhelming and, as a direct result, the use of flash memory has increased dramatically in embedded systems. From a software viewpoint, flash and EEPROM technologies are very similar. The major difference is that flash devices can only be erased one sector at a time, not byte-by-byte. Typical sector sizes are in the range 256 bytes to 16KB. Despite this disadvantage, flash is much more popular than EEPROM and is rapidly displacing many of the ROM devices as well.
