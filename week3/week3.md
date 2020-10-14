@@ -1,5 +1,8 @@
 # Embedded Systems Study Group
 
+- [PWM](#pwm)
+- [L298N Motor Driver](#L298n-motor-driver)
+    - [Proteus Simulation](#proteus-simulation)
 - [Memory Allocation in C](#memory-allocation-in-c)
     - [Text Segment](#text-segment)
     - [Stack](#stack)
@@ -8,6 +11,59 @@
     - [Types Of RAM](#types-of-ram)
     - [Types Of ROM](#types-of-rom)
     - [Types Of Hybrid](#types-of-hybrid)
+
+## PWM
+- PWM(Pulse Width Modulation) is one of the type of digital signal, which is used in almost every control circuit.
+- In PWM, concept of duty cycle is important. Following image shows three different digital signal with different duty cycles:
+
+<p align="center">
+    <img width="480" height="320" src="../assets/week3/pwm_duty_cycle.png">
+</p>
+
+- As you can see for 50% duty cycle, on time = off time. So **formula of Duty cycle is (Ton/T)\*100 %**
+- Application of PWM:
+1. Control Speed of motors
+2. Control dimming of RGB LEDs
+3. Control the position of Servos
+- Let's see How PWM is used to control motor direction.
+
+## L298N Motor Driver
+- L298N is a transistor based motor driver which having two motor channels.
+- Pin Configuration of L298N as follows:
+
+<p align="center">
+    <img width="360" height="280" src="../assets/week3/l298n_pin_config.jpg">
+</p>
+
+- Each channel has three control signals to control motor direction and speed which are:
+1. IN1 AND IN2: These are directional pins
+2. PWMA: This pin is used for controlling speed of motor 
+- Examples:
+1. Forward Motion of motor:
+- IN1: HIGH && IN2: LOW
+- PWMA: Speed will be dependent on this signal, if PWMA is HIGH then motor will move at maximum speed in forward direction. For 50 % duty cycle motors will run at half speed in forward direction.
+2. Backword Motion of motor:
+- IN1: LOW && IN2: HIGH
+- PWMA: Speed will be dependent on this signal, if PWMA is HIGH then motor will move at maximum speed in backward direction.
+
+<p align="center">
+    <img width="560" height="320" src="../assets/week3/basic_h_bridge.png">
+</p>
+
+## Proteus Simulation
+- The circuit consists of arduino uno, L298N and three switches for three different duty cycle options
+1. SW1: 75% Duty Cycle
+2. SW2: 50% Duty Cycle
+3. SW3: 25% Duty Cycle
+<p align="center">
+    <img width="720" height="500" src="../assets/week3/circuit_diagram.JPG">
+</p>
+
+- 75 % Duty Cycle:
+<p align="center">
+    <img width="560" height="320" src="../assets/week3/75_duty_cycle.JPG">
+</p>
+
 
 ## Memory Allocation in C
 When any program is loaded into the memory, it is organised into three parts called segments, which are:
