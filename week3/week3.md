@@ -3,6 +3,8 @@
 - [PWM](#pwm)
 - [L298N Motor Driver](#l298n-motor-driver)
     - [Proteus Simulation](#proteus-simulation)
+- [ESP32 Block Diagram](#esp32-block-diagram)
+- [Registers in MCU](#registers-in-mcu)
 - [Memory Allocation in C](#memory-allocation-in-c)
     - [Text Segment](#text-segment)
     - [Stack](#stack)
@@ -63,6 +65,26 @@
 <p align="center">
     <img width="560" height="320" src="../assets/week3/75_duty_cycle.JPG">
 </p>
+
+## ESP32 Block Diagram
+
+<p align="center">
+    <img width="560" height="320" src="../assets/week3/esp32_block_diagram.png">
+</p>
+
+- As you can see ESP32 block diagram consist of core cpu, memory and other communication protocol units like SPI, I2C, I2S, UART and many other units.
+
+## Registers in MCU
+
+- In every functional units of micro-controller there are different register for different functions. Some registers are simply used for data storage while some used for storing configuration of that particular unit.
+- Just for more intuitive idea about these registers let's check out UART unit ofw 8051 micro-controller:
+
+<p align="center">
+    <img width="560" height="320" src="../assets/week3/8051_uart.png">
+</p>
+
+- In above application, SBUF is 8 bit register which is used for holding the received data.
+- In similar manner Registers are used in different micro-controller for different purpose.
 
 
 ## Memory Allocation in C
