@@ -1,18 +1,23 @@
 # Embedded Systems Study Group
 
-- [PWM](#pwm)
-- [L298N Motor Driver](#l298n-motor-driver)
-    - [Proteus Simulation](#proteus-simulation)
-- [ESP32 Block Diagram](#esp32-block-diagram)
-- [Registers in MCU](#registers-in-mcu)
-- [Memory Allocation in C](#memory-allocation-in-c)
+- [Embedded Systems Study Group](#embedded-systems-study-group)
+  - [PWM](#pwm)
+  - [L298N Motor Driver](#l298n-motor-driver)
+  - [Proteus Simulation](#proteus-simulation)
+  - [ESP32 Block Diagram](#esp32-block-diagram)
+  - [Registers in MCU](#registers-in-mcu)
+  - [Memory Allocation in C](#memory-allocation-in-c)
     - [Text Segment](#text-segment)
     - [Stack](#stack)
     - [Heap](#heap)
-- [Types of memory in Embedded Systems](#types-of-memory-in-embedded-systems)
+      - [NOTE](#note)
+  - [Types of Memory in Embedded Systems](#types-of-memory-in-embedded-systems)
     - [Types Of RAM](#types-of-ram)
     - [Types Of ROM](#types-of-rom)
-    - [Types Of Hybrid](#types-of-hybrid)
+    - [Types of Hybrid](#types-of-hybrid)
+- [Bootloader](#bootloader)
+- [Flashing a microcontroller and bootloaders role in it](#flashing-a-microcontroller-and-bootloaders-role-in-it)
+
 
 ## PWM
 - PWM(Pulse Width Modulation) is one of the type of digital signal, which is used in almost every control circuit.
@@ -202,3 +207,27 @@ As memory technology has matured in recent years, the line between RAM and ROM h
 EEPROMs are electrically-erasable-and-programmable. Internally, they are similar to EPROMs, but the erase operation is accomplished electrically, rather than by exposure to ultraviolet light. Any byte within an EEPROM may be erased and rewritten. Once written, the new data will remain in the device forever--or at least until it is electrically erased. Obviously the cost is higher.
 
 Flash memory combines the best features of the memory devices described thus far. Flash memory devices are high density, low cost, nonvolatile, fast (to read, but not to write), and electrically reprogrammable. These advantages are overwhelming and, as a direct result, the use of flash memory has increased dramatically in embedded systems. From a software viewpoint, flash and EEPROM technologies are very similar. The major difference is that flash devices can only be erased one sector at a time, not byte-by-byte. Typical sector sizes are in the range 256 bytes to 16KB. Despite this disadvantage, flash is much more popular than EEPROM and is rapidly displacing many of the ROM devices as well.
+
+# Bootloader
+
+Bootloader is a software code(written by manufacturer) that resides in microcontroller memory. This code helps microcontroller to get programmed from host PC. Generally RS232 UART protocol is used to program the controller but some of them also use SPI, I2C or Modbus ASCII.
+
+When microcontroller is powered ON or reset, it checks for the bootloader condition. If condition is satisfied then bootloader code will be executed and if not, then user application will start running. Bootloader condition can be checked either by hardware or software.
+
+![](../assets/week3/bootloader_block_diagram.jpeg)
+
+The bootloader is stored in an area of protected memory (although this area of memory is not always fool-proof and can be overwritten by a stack overflow, for example). An onboard bootloader resides in memory in an MCU in an area of ROM or flash memory that is protected from getting written over. A bootloader performs various hardware checks, initializes the processor and peripherals, and does other tasks like partitioning or configuring registers. 
+
+Besides getting a system on its feet, bootloaders are also used to update MCU firmware later on. Bootloaders must be able to communicate with the outside world in order to get updates, so most bootloaders are able to communicate with some form of interface, be it I2C, SPI, USART, USB, or some other protocol. Bootloaders also need to be able to map the memory of the specific architecture and read, write, and partition memory. If EEPROM is present, a bootloader must be able to at least read the EEPROM, as this is where the next bit of code might come from.
+
+# Flashing a microcontroller and bootloaders role in it
+
+Lets take the example of ESP32:
+
+Bootloader performs the following functions:
+
+* Minimal initial configuration of internal modules
+* Select the application partition to boot, based on the partition table and ota_data (if any)
+* Load this image to RAM (IRAM & DRAM) and transfer management to it.
+
+So, the ESP32 has a bit of advanced bootloader which can even manage OTA updates. Next steps will be shown hands on
