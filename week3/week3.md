@@ -17,7 +17,7 @@
     - [Types of Hybrid](#types-of-hybrid)
 - [Bootloader](#bootloader)
 - [Flashing a microcontroller and bootloaders role in it](#flashing-a-microcontroller-and-bootloaders-role-in-it)
-
+- [Assignment](#assignment)
 
 ## PWM
 - PWM(Pulse Width Modulation) is one of the type of digital signal, which is used in almost every control circuit.
@@ -231,3 +231,7 @@ Bootloader performs the following functions:
 * Load this image to RAM (IRAM & DRAM) and transfer management to it.
 
 So, the ESP32 has a bit of advanced bootloader which can even manage OTA updates. Next steps will be shown hands on
+
+# Assignment
+
+* [Assignment 3](../assets/week3/embedded_assignment_3.pdf)
