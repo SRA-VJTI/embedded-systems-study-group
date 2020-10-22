@@ -231,7 +231,7 @@ command: `gcc main.c other.c -o main`
 <details>
 <summary>Answer</summary>
 <br>
-It won't compile as we can't extern a static variable, as the scope of a static variable is limited only to its translation unit, i.e if defined in a function, it can be seen by other functions, similarly if defined globally in a source file other source files can't access it.
+It won't compile as we can't extern a static variable, as the scope of a static variable is limited only to its translation unit, i.e if defined in a function, it can't be seen by other functions, similarly if defined globally in a source file other source files can't access it.
 <img src="../assets/week4/static_variable_error.png">
 
 If you recall, we get undefined reference error when we didnot include a object file of a function and used it, same happens here, as extern expects a variable defined in some other source file, but it cannot find the variable, as it is static, thus it's visibility is restricted only to the source file where it is defined, `other.c` and not `main.c`
