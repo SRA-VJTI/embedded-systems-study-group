@@ -185,8 +185,37 @@ Since, register doesn't have an address we cannot request it's address using `&`
 
 # Byte ordering
 
-https://www.geeksforgeeks.org/little-and-big-endian-mystery/
+Little and big endian are two ways of storing multibyte data-types ( int, float, etc). In little endian machines, last byte of binary representation of the multibyte data-type is stored first. On the other hand, in big endian machines, first byte of binary representation of the multibyte data-type is stored first.
 
-https://www.geeksforgeeks.org/little-and-big-endian-mystery/ 
+![](../assets/week4/endian.gif)
 
-https://betterexplained.com/articles/understanding-big-and-little-endian-byte-order/
+Let's see an example:
+
+```c
+int *i; // pointer to an int (4 bytes on 32-bit machine)
+i = 0;  // points to location zero, so *i is the value there
+```
+
+What is the value of i?
+
+Big endian machine: An int is 4 bytes, and the first is the largest. I read 4 bytes (W X Y Z) and W is the largest. The number is 0x12345678.
+Little endian machine: Sure, an int is 4 bytes, but the first is smallest. I also read W X Y Z, but W belongs way in the back -- it's the littlest. The number is 0x78563412.
+
+<iframe src="https://instacalc.com/1067/embed" width="450" height="350" frameborder="0"></iframe>
+
+Use this code to check endianness on your computer
+
+```c
+#include <stdio.h> 
+int main()  
+{ 
+   unsigned int i = 1; 
+   char *c = (char*)&i; 
+   if (*c)     
+       printf("Little endian"); 
+   else
+       printf("Big endian"); 
+   getchar(); 
+   return 0; 
+} 
+```
