@@ -2,6 +2,11 @@
 
 - [Embedded Study Group](#embedded-study-group)
 - [Dynamic Memory](#dynamic-memory)
+  - [Use](#use)
+  - [Accessing](#accessing)
+  - [Precautions](#precautions)
+  - [Memory Leak](#memory-leak)
+  - [Memory Fragmentation](#memory-fragmentation)
 - [Storage Classes in C](#storage-classes-in-c)
   - [auto](#auto)
   - [extern](#extern)
@@ -10,6 +15,102 @@
 - [Byte ordering](#byte-ordering)
 
 # Dynamic Memory
+
+## Use
+When a variable is defined in the source program, the type of the variable determines how much memory the compiler allocates. When the program executes, the variable consumes this amount of memory regardless of whether the program actually uses the memory allocated. This is particularly true for arrays. However, in many situations, it is not clear how much memory the program will actually need.  For example, we may have declared arrays to be large enough to hold the maximum number of elements we expect our application to handle. If too much memory is allocated and then not used, there is a waste of memory.  If not enough memory is allocated, the program is not able to fully handle the input data. We can make our program more flexible if, during execution, it could allocate initial and additional memory when needed and free up the memory when it is no more needed. Allocation of memory during execution is called dynamic memory allocation. C provides library functions to allocate and free up memory dynamically during program execution.  Dynamic memory is allocated on the heap by the system.
+
+## Accessing
+
+There is a family of four functions which allow programs to dynamically allocate memory on the heap.
+In order to use these functions you have to include the stdlib.h header file in your program.
+
+- malloc()
+
+```c
+        void * malloc (size_t nbytes);
+```
+`nbytes` is the number of bytes that to be assigned to the pointer. The function returns a pointer of type `void*`.  When allocating memory, `malloc()` returns a pointer which is just a byte address. Thus, it does not point to an object of a specific type. A pointer type that does not point to a specific data type is said to point tovoid type, that is why we have to type cast the value to the type of the destination pointer, for example:
+
+```c
+        char* test;
+        test = (char*) malloc(10);
+```
+
+- calloc()
+
+```c
+        void* calloc (size_t nelements, size_t size);
+```
+calloc() is very similar to malloc() in its operation except its prototype have two parameters.  These two parameters are multiplied to obtain the total size of the memory block to be assigned. Usually the first parameter (nelements) is the number of elements and the second one (size) serves to specify the size of each element. For example, we could define test with calloc():
+
+```c
+        int* test;
+        
+        test = (int *) calloc(5, sizeof(int));
+```
+NOTE:- `calloc() initializes all its elements to 0`
+
+- realloc()
+
+  ```c
+          void* realloc (void * pointer, size_t elemsize);
+  ```
+It changes the size of a memory block already assigned to a pointer.  pointer parameter receives a pointer to the already assigned memory block and size specifies the new size that the memory block shall have. The function assigns size bytes of memory to the pointer. The function may need to change the location of the memory block so that the new size can fit; in that case the present content of the block is copied to the new one. The new pointer is returned by the function and if it has not been possible to assign the memory block with the new size it returns a null pointer.
+
+  ```c
+          int *ptr = (int *)malloc(sizeof(int)*2); 
+
+          int *ptr_new; 
+          ptr_new = (int *)realloc(ptr, sizeof(int)*3);
+  ```
+
+- free()
+
+  ```c
+          void free (void * pointer);
+  ```
+It releases a block of dynamic memory previously assigned using malloc(),calloc() or realloc().  This function must only be used to release memory assigned with functions malloc(),calloc() and realloc().
+
+## Precautions
+
+- One must always verify whether the pointer returned is NULL.   
+  ```c
+          if (theptr != NULL)
+  ```
+
+- Appropriately cast to the type of required pointer. If malloc() is successful, objects in dynamically allocated memory can be accessed indirectly by dereferencing the pointer or by indexing like we do with arrays.
+
+- If allocating memory for a string, don't forget to allocate , one extra byte for the null terminator of the string.
+
+- After you have used the block of memory, do not forget to free the memory block using `free()`.
+
+## Memory Leak
+
+It is easy to introduce memory leaks into application code implemented using malloc() and free(). This is caused by memory being allocated and never being deallocated. Such errors tend to cause a gradual performance degradation and eventual failure. This type of bug can be very hard to locate.
+
+## Memory Fragmentation
+
+The best way to understand memory fragmentation is to look at an example. For this example, it is assumed hat there is a 10K heap. First, an area of 3K is requested, thus:
+  ```c
+           #define K (1024)
+           char *p1;
+           p1 = malloc(3*K);
+  ```
+Then, a further 4K is requested:
+  ```c
+          p2 = malloc(4*K);
+  ```
+3K of memory is now free.
+
+Some time later, the first memory allocation, pointed to by p1, is de-allocated:
+  ```c
+          free(p1);
+  ```
+This leaves 6K of memory free in two 3K chunks. A further request for a 4K allocation is issued:
+  ```c
+         p1 = malloc(4*K);
+  ```
+This results in a failure – NULL is returned into p1 – because, even though 6K of memory is available, there is not a 4K contiguous block available. This is memory fragmentation.
 
 # Storage Classes in C
 
