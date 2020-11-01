@@ -1,6 +1,6 @@
-# Embedded Study Group
+# Embedded Systems Study Group
 
-- [Embedded Study Group](#embedded-study-group)
+- [Embedded Systems Study Group](#embedded-systems-study-group)
 - [Dynamic Memory](#dynamic-memory)
   - [Use](#use)
   - [Accessing](#accessing)
@@ -320,3 +320,5 @@ int main()
    return 0; 
 } 
 ```
+
+Note: There is no difference between performance in little endian and big endian machines, it's just a matter of convention.
