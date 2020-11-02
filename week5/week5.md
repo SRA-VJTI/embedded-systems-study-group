@@ -12,7 +12,11 @@
   - [GPIO's on ESP32](#gpios-on-esp32)
     - [Config GPIOs](#config-gpios)
     - [Set GPIOs](#set-gpios)
+    - [Get GPIOs](#get-gpios)
     - [How are GPIO's handled internally](#how-are-gpios-handled-internally)
+  - [Peripheral register map in ESP32](#peripheral-register-map-in-esp32)
+  - [GPIO register map in ESP32](#gpio-register-map-in-esp32)
+  - [Using GPIO registers to read/write from GPIOs](#using-gpio-registers-to-readwrite-from-gpios)
  
 # ADC
 
@@ -204,17 +208,17 @@ output:
 
 # GPIO
 
-A General Purpose Input/output (GPIO) is an interface available on most modernmicrocontrollers (MCU) to provide an ease of access to the devices internal properties.
+A General Purpose Input/output (GPIO) is an interface available on most modernmicrocontrollers (MCU) to provide an ease of access to the device's internal properties.
 
-Generally there are multiple GPIO pins on a single MCU for the use of multipleinteraction so simultaneous application. The pins can be programmed as input, wheredata from some external source is being fed into the system to be manipulated at a desiredtime and location. Output can also be performed on GPIOs.
+Generally there are multiple GPIO pins on a single MCU for the use of multiple interaction for simultaneous application. The pins can be programmed as input, where data from some external source is being fed into the system to be manipulated at a desired time and location. Output can also be performed on GPIOs.
 
-GPIOs are used in a diverse variety of applications, limited only by the electrical and timing specifications of the GPIO interface and the ability of software to interact with GPIOs in a sufficiently timely manner. 
+GPIOs are used in a diverse variety of applications, limited only by the electrical and timing specifications of the GPIO interface and the ability of software to interact with GPIOs in a sufficiently timely manner.
 
 ## Implementation
 
-GPIO interfaces vary widely. In some cases, they are simple—a group of pins that can switch as a group to either input or output. In others, each pin can be set up to accept or source different logic voltages, with configurable drive strengths and pull ups/downs.
+GPIO interfaces vary widely. In some cases, they are simple, group of pins that can switch as a group to either input or output. In others, each pin can be set up to accept or source different logic voltages, with configurable drive strengths and pull ups/downs.
 
-A GPIO pin's state may be exposed to the software developer through one of a number of different interfaces, such as a memory-mapped I/O peripheral, or through dedicated IO port instructions. 
+A GPIO pin's state may be exposed to the software developer through one of a number of different interfaces, such as a memory-mapped I/O peripheral, or through dedicated IO port instructions.
 
 A GPIO port is a group of GPIO pins (usually 8 GPIO pins) arranged in a group and controlled as a group.
 
@@ -294,6 +298,9 @@ static inline void gpio_ll_set_level(gpio_dev_t *hw, gpio_num_t gpio_num, uint32
         }
     }
 }
+```
+
+As you can see, the variable out_w1ts is set to `1 << gpio_num`, as this registers represents the register used to manipulate gpio pins, so we are setting bits of this register to accordingly set it's value in the pin.
 
 This can be found in `esp/esp-idf/components/soc/include/hal/gpio_ll.h`
 
@@ -301,6 +308,7 @@ This can be found in `esp/esp-idf/components/soc/include/hal/gpio_ll.h`
 
 To get value of a gpio, we use the following function `gpio_get_level()`, so if we want to get value of gpio 21, we'll do this: `gpio_get_level((gpio_num_t)21)`
 
+```c
 static inline int gpio_ll_get_level(gpio_dev_t *hw, gpio_num_t gpio_num)
 {
     if (gpio_num < 32) {
@@ -313,6 +321,11 @@ static inline int gpio_ll_get_level(gpio_dev_t *hw, gpio_num_t gpio_num)
 
 This can be found in `esp/esp-idf/components/soc/include/hal/gpio_ll.h`
 
+Similarly here we are reading from the input register, which stores the input value of the register and if it is HIGH, the bit is set to 1, or else 0. These registers are mapped to a single gpio pin, but using a mux which is setup while config, we can point this pin to either in/out registers.
+
+We use bit manipulation to find the value stored at that specific bit, so here we right shift value stored in `variable in` and thus the required bit is the leftmost bit, then we bitwise and it with `0x1`. So, if value of pin is 1, then `1 & 1 = 1` and if it is 0, then `0 & 1 = 0`
+
+
 ### How are GPIO's handled internally
 
 As we read earlier, these gpio's are controlled using registers. There registers have been memory mapped, so consider them as a variable pointer which can then be manipulated to set their values.
@@ -321,11 +334,7 @@ Typically when we access registers in C based on memory-mapped IO we use a point
 
 Below is the struct used to control the gpio's, inshort this struct is used to represent the registers in our code as variables. Since a struct is stored as contagious memory location, so if we set the starting address of the this struct to that of the peripheral registers, we can use the struct to manipulate those registers.
 
-Dealing with a memory mapped file is really no different than dealing with any other kind of pointer to memory. The memory mapped file is just a block of data that you can read and write to from any process using the same name. 
-
-```c
-struct volatile gpio_dev_t *__gpio_reg = (void*)0x3FF44000;
-```
+Dealing with a memory mapped register is really no different than dealing with any other kind of pointer to memory. The memory mapped file is just a block of data that you can read and write to from any process using the same name. 
 
 ```c
 typedef volatile struct gpio_dev_s {
@@ -361,12 +370,38 @@ extern gpio_dev_t GPIO;
 
 This can be found in `esp/esp-idf/components/soc/soc/esp32/include/soc/gpio_struct.h`
 
+How do we set this struct to specific memory location, here's how we do that !
+
+```c
+struct volatile gpio_dev_t *__gpio_reg = (void*)0x3FF44000;
+```
+
+## Peripheral register map in ESP32
+
 ![](../assets/week5/peripheral_register_map.png)
+
+As we can see the address of GPIO peripheral is `0x3FF4_4000`, thus if we point our struct to that address we can write to the register and control the gpio's
+
+## GPIO register map in ESP32
+
 ![](../assets/week5/register_map.png)
 ![](../assets/week5/register_map_continued.png)
 
+This is the GPIO Register map for GPIO registers in ESP32, each of these register is a 32bit register and has a separate address. So we can individually manipulate each register using it's address.
+
+The registers that are important for us are the following `GPIO_OUT_REG`, `GPIO_OUT_W1TS_REG`, `GPIO_OUT_W1TC_REG` and `GPIO_IN_REG`. We can use these registers to manipulate GPIO's, i.e. read and write from these registers to actually set output HIGH/LOW or read the input on gpios.
+
+* `GPIO_OUT_REG` - GPIO0-31 output value, if it is 1, then corresponding GPIO gives high if it is 0, then low.
+* `GPIO_OUT_W1TS_REG` - Rather than manipulating the main `GPIO_OUT_REGISTER`, we can write to this register to output HIGH on the corresponding pin. For every bit that is 1 in the value written here, the corresponding bit in `GPIO_OUT_REG` will be set(set to 1).
+*  `GPIO_OUT_W1TC_REG` - Rather than manipulating the main `GPIO_OUT_REGISTER`, we can write to this register to output LOW to the corresponding pin. For every bit that is 1 in the value writtenhere, the corresponding bit in GPIO_OUT_REG will be cleared(set to 0).
+*  `GPIO_IN_REG` - We can read from this register to read the value of the corresponding gpio. Each bit represents a gpio input value, 1 for HIGH and 0 for LOW.
+
+This is how the register actually look, since esp32 is a little endian system low address is for LSB and higher address is for MSB.
+
 ![](../assets/week5/gpio_out_register_map.png)
 ![](../assets/week5/gpio_in_register_map.png)
+
+## Using GPIO registers to read/write from GPIOs
 
 [led blink using struct register access](../assets/week5/esp-gpio-example-output.zip)
 [button input using struct register access](../assets/week5/esp-gpio-example-input.zip)
