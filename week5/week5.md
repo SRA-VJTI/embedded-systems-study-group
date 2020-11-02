@@ -3,9 +3,9 @@
 - [ADC](#adc)
 - [DAC](#dac)
 - [Bit manipulations](#bit-manipulations)
-  - [& operator](#-operator)
-  - [| operator](#-operator-1)
-  - [<< operator](#-operator-2)
+  - [and operator](#and-operator)
+  - [or operator](#or-operator)
+  - [<< operator](#-operator)
   - [>> operator](#blockquoteblockquoteoperatorblockquoteblockquote)
 - [GPIO](#gpio)
   - [Implementation](#implementation)
@@ -28,7 +28,7 @@
 
 # Bit manipulations
 
-## & operator
+## and operator
 
 `a & b` does bitwise and of the two values
 
@@ -52,7 +52,7 @@ int main()
 
 output: `decimal: 0 hex: 0`
 
-## | operator
+## or operator
 
 `a | b` does bitwise or of the two values
 
