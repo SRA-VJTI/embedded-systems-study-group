@@ -17,6 +17,10 @@
   - [Peripheral register map in ESP32](#peripheral-register-map-in-esp32)
   - [GPIO register map in ESP32](#gpio-register-map-in-esp32)
   - [Using GPIO registers to read/write from GPIOs](#using-gpio-registers-to-readwrite-from-gpios)
+    - [Led blink using struct to access registers](#led-blink-using-struct-to-access-registers)
+    - [Button input using struct to access registers](#button-input-using-struct-to-access-registers)
+    - [Led blink using direct memory access](#led-blink-using-direct-memory-access)
+    - [Button input using direct memory access](#button-input-using-direct-memory-access)
  
 # ADC
 
@@ -403,8 +407,197 @@ This is how the register actually look, since esp32 is a little endian system lo
 
 ## Using GPIO registers to read/write from GPIOs
 
-[led blink using struct register access](../assets/week5/esp-gpio-example-output.zip)
-[button input using struct register access](../assets/week5/esp-gpio-example-input.zip)
-[led blink using direct memory access](../assets/week5/esp-gpio-output-direct-memory-access.zip)
-[button input using direct memory access](../assets/week5/esp-gpio-input-direct-memory-access.zip)
+### Led blink using struct to access registers
 
+Download esp-idf app from [here](../assets/week5/esp-gpio-example-output.zip). Unzip it and open the directory. Run `idf.py flash`.
+
+```c
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+
+void app_main(void)
+{
+    gpio_config_t io_conf;
+    // bit mask for the pins, each bit maps to a GPIO 
+    io_conf.pin_bit_mask = (1ULL<<2);
+
+    // set gpio mode to input
+    io_conf.mode = GPIO_MODE_OUTPUT;
+
+    // enable pull up resistors
+    io_conf.pull_up_en = 1;
+
+    // disable pull down resistors
+    io_conf.pull_down_en = 0;
+
+    // disable gpio interrupts
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+
+    // detailed description can be found at https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv413gpio_config_t
+
+    // configure gpio's according to the setting specified in the gpio struct
+    esp_err_t err = gpio_config(&io_conf);
+
+    static volatile gpio_dev_t *__gpio_reg = (void*)0x3FF44000;
+    
+    while(1)
+    {
+        __gpio_reg->out_w1ts = (1 << 2);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+ 
+        __gpio_reg->out_w1tc = (1 << 2);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+    }
+}
+```
+
+So, we set struct to address 0x3FF44000 and made it volatile variable as it's value can change anytime due to external factors. Since we want to Blink led connected on Pin 2 onboard LED, we will set bit-2 as 1, so `1 << 2`, and do this to w1ts to set HIGH to gpio and do this to w1tc to set LOW to gpio
+
+### Button input using struct to access registers
+
+Download esp-idf app [here](../assets/week5/esp-gpio-example-input.zip). Unzip it and open the directory. Run `idf.py flash`.
+
+```c
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
+
+void app_main(void)
+{
+    gpio_config_t io_conf;
+    // bit mask for the pins, each bit maps to a GPIO 
+    io_conf.pin_bit_mask = (1ULL<<0);
+
+    // set gpio mode to input
+    io_conf.mode = GPIO_MODE_INPUT;
+
+    // enable pull up resistors
+    io_conf.pull_up_en = 1;
+
+    // disable pull down resistors
+    io_conf.pull_down_en = 0;
+
+    // disable gpio interrupts
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+
+    // detailed description can be found at https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv413gpio_config_t
+
+    // configure gpio's according to the setting specified in the gpio struct
+    esp_err_t err = gpio_config(&io_conf);
+
+    static volatile gpio_dev_t *__gpio_reg = (void*)0x3FF44000;
+    
+    while(1)
+    {
+        int bit_value = __gpio_reg->in >> 0 & 0x1;
+        
+        ESP_LOGI("gpio","value: %d", bit_value);
+        vTaskDelay(10/portTICK_PERIOD_MS);
+    }
+}
+```
+
+So, we set struct to address 0x3FF44000 and made it volatile variable as it's value can change anytime due to external factors. Since we want to read the value of gpio 0, which has the boot button connected to it, we won't need to left shift it, as bit 0 represents state of pin 0. We `and` it with `0x1`, such that we extract the value of the 0th bit, and display it.
+
+### Led blink using direct memory access
+
+Download esp-idf app [here](../assets/week5/esp-gpio-output-direct-memory-access.zip). Unzip it and open the directory. Run `idf.py flash`.
+
+```c
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
+
+void app_main(void)
+{
+    gpio_config_t io_conf;
+    // bit mask for the pins, each bit maps to a GPIO 
+    io_conf.pin_bit_mask = (1ULL<<2);
+
+    // set gpio mode to input
+    io_conf.mode = GPIO_MODE_OUTPUT;
+
+    // enable pull up resistors
+    io_conf.pull_up_en = 1;
+
+    // disable pull down resistors
+    io_conf.pull_down_en = 0;
+
+    // disable gpio interrupts
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+
+    // detailed description can be found at https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv413gpio_config_t
+
+    // configure gpio's according to the setting specified in the gpio struct
+    esp_err_t err = gpio_config(&io_conf);
+
+    static volatile uint32_t *gpio_out_set_var = (void*)0x3FF44008;
+    static volatile uint32_t *gpio_out_clear_var = (void*)0x3FF4400c;
+    
+    while(1)
+    {
+        *gpio_out_set_var = (1 << 2);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+ 
+        *gpio_out_clear_var = (1 << 2);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+    }
+}
+```
+
+In this case we directly access the two 32-bit registers, by assigning their address to pointers, i.e. 0x3FF44008 for w1ts and 0x3FF4400c for w1tc register.We made it volatile variable as it's value can change anytime due to external factors. Since we want to Blink led connected on Pin 2 onboard LED, we will set bit-2 as 1, so `1 << 2`, and do this to w1ts to set HIGH to gpio and do this to w1tc to set LOW to gpio
+
+
+### Button input using direct memory access
+
+Download esp-idf app [here](../assets/week5/esp-gpio-input-direct-memory-access.zip). Unzip it and open the directory. Run `idf.py flash`.
+
+```c
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
+
+void app_main(void)
+{
+    gpio_config_t io_conf;
+    // bit mask for the pins, each bit maps to a GPIO 
+    io_conf.pin_bit_mask = (1ULL<<0);
+
+    // set gpio mode to input
+    io_conf.mode = GPIO_MODE_INPUT;
+
+    // enable pull up resistors
+    io_conf.pull_up_en = 1;
+
+    // disable pull down resistors
+    io_conf.pull_down_en = 0;
+
+    // disable gpio interrupts
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+
+    // detailed description can be found at https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv413gpio_config_t
+
+    // configure gpio's according to the setting specified in the gpio struct
+    esp_err_t err = gpio_config(&io_conf);
+
+    static volatile uint32_t *gpio_in_arr = (void*)0x3FF4403C;
+    
+    while(1)
+    {
+        int bit_value = *gpio_in_arr & 0x1;
+        
+        ESP_LOGI("gpio","value: %d", bit_value);
+        vTaskDelay(10/portTICK_PERIOD_MS);
+    }
+}
+```
+
+In this case we directly access the 32-bit registers, by assigning their address to pointers, i.e. 0x3FF4403C for input register. We made it volatile variable as it's value can change anytime due to external factors. Since we want to read the value of gpio 0, which has the boot button connected to it, we won't need to left shift it, as bit 0 represents state of pin 0. We `and` it with `0x1`, such that we extract the value of the 0th bit, and display it.
