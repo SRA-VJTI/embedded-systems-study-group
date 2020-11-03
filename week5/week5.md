@@ -1,7 +1,10 @@
 # Embedded Systems Study Group
 - [Embedded Systems Study Group](#embedded-systems-study-group)
-- [ADC](#adc)
-- [DAC](#dac)
+- [Basic of ADC and DAC](#basic-of-adc-and-dac)
+    - [ADC](#adc)
+    - [DAC](#dac)
+- [ESP32 DAC](#esp32-dac)
+- [ESP32 ADC](#esp32-adc)
 - [Bit manipulations](#bit-manipulations)
   - [and operator](#and-operator)
   - [or operator](#or-operator)
@@ -21,10 +24,171 @@
     - [Button input using struct to access registers](#button-input-using-struct-to-access-registers)
     - [Led blink using direct memory access](#led-blink-using-direct-memory-access)
     - [Button input using direct memory access](#button-input-using-direct-memory-access)
- 
-# ADC
 
-# DAC
+ 
+# Basic of ADC and DAC:
+
+## ADC
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/adc.png">
+</p>
+
+- As you can see from the image, an ADC converts input analog signal to Digital Binary Output
+
+## DAC
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/dac.png">
+</p>
+
+- On the other hand, a DAC inputs a binary number and outputs an analog voltage or current signal.
+
+- Together, they are often used in digital systems to provide complete interface with analog sensors and output devices for control systems such as those used in automotive engine controls:
+
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/adc-dac.png">
+</p>
+
+# ESP32 DAC
+- ESP32 has two 8-bit DAC (digital to analog converter) channels, connected to **GPIO25** (Channel 1) and **GPIO26** (Channel 2).
+- The DAC driver allows these channels to be set to arbitrary voltages.
+- How to Use ESP32's DAC:
+    1. First enable DAC using:
+    > dac_output_enable(DAC_CHANNEL_1); &nbsp; &nbsp; //Channel 1 = GPIO25
+    2. Write Output Voltage on DAC:
+    > dac_output_voltage(DAC_CHANNEL_1, 200); 
+- Formula for DAC:  
+   **Channel Output = (VDD * dac_output_voltage / 255)**&nbsp; &nbsp; {VDD : 3.3V} <br />
+    In above example, dac_output_voltage was 200.<br />
+    Channel Output = (3.3 * 200 / 255) = 2.58V
+## ESP32 DAC code for triangular wave:
+- [esp-idf-template](https://github.com/espressif/esp-idf-template)
+> git clone https://github.com/espressif/esp-idf-template<br />
+ paste below code in main.c
+
+```c
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include <driver/dac.h>
+
+
+void app_main(void)
+{
+    dac_output_enable(DAC_CHANNEL_1);
+    while (1) {
+        for(int i = 0; i <= 255; i++)
+        {
+           dac_output_voltage(DAC_CHANNEL_1, i); 
+           printf("%d\n", i);
+           vTaskDelay(10 / portTICK_PERIOD_MS);
+        }
+        for(int i = 255; i >= 0; i--)
+        {
+           dac_output_voltage(DAC_CHANNEL_1, i); 
+           printf("%d\n", i);
+           vTaskDelay(10 / portTICK_PERIOD_MS);
+        }        
+        
+    }
+}
+
+```
+
+- Serial Plotter Output: (Ideal Output)
+![](../assets/week5/triangular_wave.gif)
+
+
+# ESP32 ADC
+- The ESP32 integrates two 12-bit SAR (Successive Approximation Register) ADCs, supporting a total of 18 measurement channels (analog enabled pins).
+- The ADC driver API supports ADC1 (8 channels, attached to GPIOs 32 - 39), and ADC2 (10 channels, attached to GPIOs 0, 2, 4, 12 - 15 and 25 - 27). 
+```c
+ADC1_CH0 – GPIO36
+ADC1_CH1 – GPIO37
+ADC1_CH2 – GPIO38
+ADC1_CH3 – GPIO39
+ADC1_CH4 – GPIO32
+ADC1_CH5- GPIO33
+ADC1_CH6 – GPIO34
+ADC1_CH7 – GPIO35
+ADC2_CH0 – GPIO4
+ADC2_CH1 – GPIO0
+ADC2_CH2 – GPIO2
+ADC2_CH3 – GPIO15
+ADC2_CH4 – GPIO13
+ADC2_CH5 – GPIO12
+ADC2_CH6 – GPIO14
+ADC2_CH7 – GPIO27
+ADC2_CH8 – GPIO25
+ADC2_CH9 – GPIO26
+```
+- How to Use ESP32's ADC:
+1. config the width of ADC channel by 
+> adc1_config_width(ADC_WIDTH_BIT_12); &nbsp; &nbsp; //ADC 1 configured to 12 Bit Width
+2. config the attenuation of ADC channel by 
+> adc1_config_channel_atten(ADC1_CHANNEL_0,ADC_ATTEN_DB_11); &nbsp; &nbsp; // ADC channel 0 configured to attenuation 11dB
+
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/adc_attenuation.png">
+</p>
+
+3. These are minimal initialization required for adc, then raw readings can be read using followig function:
+> int val = adc1_get_raw(ADC1_CHANNEL_0);
+4. For more accurate operation one should calibrate and characterize adc before reading adc raw values.<br>
+For more information checkout this adc example code:  [adc1_example](https://github.com/espressif/esp-idf/blob/master/examples/peripherals/adc/main/adc1_example_main.c)
+
+## ESP32 ADC code for reading input wave:
+
+```c
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include <driver/dac.h>
+#include <driver/adc.h>
+
+void adc_task(void *arg)
+{
+    adc1_config_width(ADC_WIDTH_BIT_12);
+    adc1_config_channel_atten(ADC1_CHANNEL_0,ADC_ATTEN_DB_11); 
+    int val = adc1_get_raw(ADC1_CHANNEL_0);
+	while(1)
+	{	
+        val = adc1_get_raw(ADC1_CHANNEL_0);
+        printf("%d\n", val);
+        vTaskDelay(10 / portTICK_PERIOD_MS);  
+    }
+	
+}
+
+void dac_task(void *arg)
+{
+    dac_output_enable(DAC_CHANNEL_1);
+    while (1) {
+        for(int i = 0; i <= 255; i++)
+        {
+           dac_output_voltage(DAC_CHANNEL_1, i); 
+           //printf("%d\n", i);
+           vTaskDelay(10 / portTICK_PERIOD_MS);
+        }
+        for(int i = 255; i >= 0; i--)
+        {
+           dac_output_voltage(DAC_CHANNEL_1, i); 
+           //printf("%d\n", i);
+           vTaskDelay(10 / portTICK_PERIOD_MS);
+        }  
+            
+    }
+}
+       
+void app_main(void)
+{
+    xTaskCreate(&adc_task,"adc_task",4096,NULL,1,NULL);
+    xTaskCreate(&dac_task,"dac_task",4096,NULL,1,NULL);
+}
+
+```
+
+- Serial Plotter Output: (Actual ADC Output)
+![](../assets/week5/triangle_wave_adc.gif)
 
 # Bit manipulations
 
