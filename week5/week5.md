@@ -3,6 +3,8 @@
 - [Basic of ADC and DAC](#basic-of-adc-and-dac)
     - [ADC](#adc)
     - [DAC](#dac)
+    - [R-2R Ladder DAC](r-2r-ladder-dac)
+    - [Application](application)
 - [ESP32 DAC](#esp32-dac)
 - [ESP32 ADC](#esp32-adc)
 - [Bit manipulations](#bit-manipulations)
@@ -42,6 +44,32 @@
 
 - On the other hand, a DAC inputs a binary number and outputs an analog voltage or current signal.
 
+## R-2R Ladder DAC:
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/r2r_ladder.png">
+</p>
+
+- The R-2R resistor ladder network directly converts a parallel digital symbol/word into an analog voltage. Each digital input (b0, b1, etc.) adds its own weighted contribution to the analog output. 
+- B3 is the MSB and B0 is the LSB.
+
+- These concept should be clear before understanding ladder network
+
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/basic_concept.jpg">
+</p>
+
+- Derivation:
+<p align="center">
+    <img width="480" height="320" src="../assets/week5/derivation.jpg">
+</p>
+
+- [More Info On derivation](https://in.tek.com/blog/tutorial-digital-analog-conversion-r-2r-dac)
+- Final Formula:
+<p align="center">
+    <img width="419" height="83" src="../assets/week5/final_formula.png">
+</p>
+
+## Application
 - Together, they are often used in digital systems to provide complete interface with analog sensors and output devices for control systems such as those used in automotive engine controls:
 
 <p align="center">
