@@ -796,4 +796,4 @@ In this case we directly access the 32-bit registers, by assigning their address
 
 # Assignment
 
-- [Week 5 Assignment]()
+- [Week 5 Assignment](https://github.com/SRA-VJTI/embedded-systems-study-group/blob/master/assets/week5/week%20_5_assignment.pdf)
