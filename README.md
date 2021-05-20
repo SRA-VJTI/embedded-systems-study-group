@@ -5,6 +5,7 @@
 * [Week 3](week3/week3.md)
 * [Week 4](week4/week4.md)
 * [Week 5](week5/week5.md)
+* [Week 6](week6/week6.md)
 
 ## Conducted by
 - [Sravan Chittupalli](https://github.com/SravanChittupalli)
