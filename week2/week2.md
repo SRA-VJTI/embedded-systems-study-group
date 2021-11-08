@@ -332,6 +332,83 @@ clean:
 		rm main.o library.o library
 ```
 
+#### Ninja 
+
+Ninja is another tool used for generating executable files according to the rules defined in corresponding Cmake file. The main purpose behind the creation of 
+Ninja is to increase the speed and improve change monitoring methods while generating executable files from large projects(It is reported to be much faster than 
+good old Make for many common scenarios). At present, it is used by many popular open source projects such as Google Chrome, LLVM, Android, etc. 
+
+##### Basic specifications : 
+
+Ninja evaluates a graph of dependencies between files, and runs whichever commands are necessary to make your build target up to date as determined by file 
+modification times. Conceptually, build statements describe the dependency graph of your project, while rule statements describe how to generate the files along a given edge of the graph.
+
+Here’s a basic .ninja file that demonstrates most of the syntax. 
+```
+cflags = -Wall
+
+rule cc
+  command = gcc $cflags -c $in -o $out
+
+build foo.o: cc foo.c
+```
+ - Variables : 
+
+Despite the non-goal of being convenient to write by hand, to keep build files readable (debuggable), Ninja supports declaring shorter reusable names for strings. 
+A declaration like the following
+```
+cflags = -g
+```
+can be used on the right side of an equals sign, dereferencing it with a dollar sign, like this :
+```
+rule cc
+  command = gcc $cflags -c $in -o $out
+```
+Variables can also be referenced using curly braces like ${in}.
+
+ - Rules : 
+
+Rules declare a short name for a command line. They begin with a line consisting of the rule keyword and a name for the rule. Then follows an indented set of 
+variable = value lines.
+
+The basic example above declares a new rule named cc, along with the command to run. In the context of a rule, the command variable defines the command to run, 
+$in expands to the list of input files (foo.c), and $out to the output files (foo.o) for the command.
+
+ - Build statements : 
+
+Build statements declare a relationship between input and output files. They begin with the build keyword, and have the format build outputs: rulename inputs. 
+Such a declaration says that all of the output files are derived from the input files. When the output files are missing or when the inputs change, Ninja will run 
+the rule to regenerate the outputs.
+
+The basic example above describes how to build foo.o, using the cc rule.
+
+A build statement may be followed by an indented set of key = value pairs, much like a rule. These variables will shadow any variables when evaluating the 
+variables in the command. For example:
+
+```
+cflags = -Wall -Werror
+rule cc
+  command = gcc $cflags -c $in -o $out
+
+# If left unspecified, builds get the outer $cflags.
+build foo.o: cc foo.c
+
+# But you can shadow variables like cflags for a particular build.
+build special.o: cc special.c
+  cflags = -Wall
+
+# The variable was only shadowed for the scope of special.o;
+# Subsequent build lines get the outer (original) cflags.
+build bar.o: cc bar.c
+```
+For more information, you can refer the official manual [here](https://ninja-build.org/manual.html#_introduction).
+
+#### Note : 
+There are many other build file(s) generating tools apart from Make and Ninja such as Boost's b2
+(Boost.build), SCons, etc. which have many similarities and would be easier to use once you learn 
+related basics. For the sake of brevity, we have only included the most popular build systems and 
+you are encouraged to explore others.
+
 #### CMake
 
 CMake is an extensible, open-source system that manages the build process in an operating system and in a compiler-independent manner.  
