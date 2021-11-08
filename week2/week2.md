@@ -11,6 +11,7 @@
 		- [Object and source files in C: .o and .c](#object-and-source-files-in-c-o-and-c)
 		- [Brief overview of GNU Make and CMake build systems](#brief-overview-of-gnu-make-and-cmake-build-systems)
 			- [GNU Make](#gnu-make)
+			- [Ninja](#ninja)
 			- [CMake](#cmake)
 		- [Memory allocation in C](#memory-allocation-in-c)
 			- [Static](#static)
@@ -344,7 +345,7 @@ Ninja evaluates a graph of dependencies between files, and runs whichever comman
 modification times. Conceptually, build statements describe the dependency graph of your project, while rule statements describe how to generate the files along a given edge of the graph.
 
 Here’s a basic .ninja file that demonstrates most of the syntax. 
-```
+```ninja
 cflags = -Wall
 
 rule cc
@@ -356,11 +357,11 @@ build foo.o: cc foo.c
 
 Despite the non-goal of being convenient to write by hand, to keep build files readable (debuggable), Ninja supports declaring shorter reusable names for strings. 
 A declaration like the following
-```
+```ninja
 cflags = -g
 ```
 can be used on the right side of an equals sign, dereferencing it with a dollar sign, like this :
-```
+```ninja
 rule cc
   command = gcc $cflags -c $in -o $out
 ```
@@ -385,7 +386,7 @@ The basic example above describes how to build foo.o, using the cc rule.
 A build statement may be followed by an indented set of key = value pairs, much like a rule. These variables will shadow any variables when evaluating the 
 variables in the command. For example:
 
-```
+```ninja
 cflags = -Wall -Werror
 rule cc
   command = gcc $cflags -c $in -o $out
@@ -454,11 +455,20 @@ add_executable(library ${PROJECT_SOURCE_DIR}/main.c ${PROJECT_SOURCE_DIR}/string
 
 Now to compile we follow the following steps:
 
+Using Make : 
 ```bash
 mkdir build
 cd build
 cmake ..
 make
+```
+
+Using Ninja :
+```bash
+mkdir build
+cd build
+cmake -G Ninja .. 
+ninja
 ```
 
 Now you can see in the root directory that a `/bin` folder has been generated, it contains the generated binary. Run and see it work.
