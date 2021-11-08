@@ -334,7 +334,7 @@ clean:
 
 #### Ninja 
 
-Ninja is another tool used for generating executable files according to the rules defined in corresponding Cmake file. The main purpose behind the creation of 
+Ninja is another tool used for generating executable files according to the rules defined in corresponding CMake file. The main purpose behind the creation of 
 Ninja is to increase the speed and improve change monitoring methods while generating executable files from large projects(It is reported to be much faster than 
 good old Make for many common scenarios). At present, it is used by many popular open source projects such as Google Chrome, LLVM, Android, etc. 
 
