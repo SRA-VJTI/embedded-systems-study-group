@@ -402,6 +402,71 @@ build special.o: cc special.c
 # Subsequent build lines get the outer (original) cflags.
 build bar.o: cc bar.c
 ```
+
+Lets create the .ninja file for generating executable file from the same folder used in Make's 
+example.
+
+```ninja 
+rule cc
+  command = gcc -c $in -I./include/ -o $out
+
+rule ll
+  command = gcc -o $out $in 
+
+rule clean 
+  command = rm -rf $in .ninja_deps .ninja_log
+```
+
+We start by defining required rules. Below is a short explanation for each rule :-
+
+1. cc : Used for generating .o files from .c files. Note that this command is also using the location of header files.
+
+2. ll : Used for linking .o files
+
+3. clean : Used for deleting all generated files.
+
+```ninja 
+build library.o: cc library.c
+
+build main.o: cc main.c
+
+build library: ll library.o main.o
+
+build clean_files: clean library library.o main.o
+```
+
+Once all basic rules are defined, we move ahead by using them in build statements as per our 
+convenience. Below is a short explanation for each build statement :-
+
+1. build library.o : Generates library.o from library.c using 'cc' rule.
+
+2. build main.o : Generated main.o from main.c using 'cc' rule.
+
+3. build library : Generates the executable 'library' after linking 'main.o' and 'library.o' using 'll' rule.
+
+4. build clean_files : Deletes all generated files using 'clean' rule.
+
+The complete build.ninja file for generating required executable is : 
+
+```ninja
+rule cc
+  command = gcc -c $in -I./include/ -o $out
+
+rule ll
+  command = gcc -o $out $in 
+
+rule clean 
+  command = rm -rf $in .ninja_deps .ninja_log
+
+build library.o: cc library.c
+
+build main.o: cc main.c
+
+build library: ll library.o main.o
+
+build clean_files: clean library library.o main.o
+```
+
 For more information, you can refer the official manual [here](https://ninja-build.org/manual.html#_introduction).
 
 #### Note : 
