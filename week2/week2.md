@@ -20,6 +20,7 @@
 			- [Static](#static)
 			- [Automatic](#automatic)
 			- [Dynamic](#dynamic)
+	- [Basics of Interpreter](#basics-of-interpreter)
 	- [Assignment](#assignment)
 
 ## Basics of Embedded Programming
@@ -626,6 +627,22 @@ For example, if you want to allocate dynamically some space to hold a struct foo
 }
 ```
 
+## Basics of Interpreter
+
+- Interpreter is a computer program that directly executes instructions written in a programming or scripting language, without requiring them previously to have been compiled into a machine language program.
+- An interpreter generally uses one of the following strategies for program execution:
+
+	- Parse the source code and perform its behavior directly. Ex:- dBASE and BASIC
+    - Translate source code into some efficient intermediate representation or object code (ex bytecode) and immediately execute that. Ex:- Java
+
+- Interpreting a program is much slower than executing native machine code
+- Interpreting a high-level language is ~100 times slower
+Interpreting an intermediate-level (such as JVM bytecode) language is ~10 slower
+- If an instruction is called repeatedly, it will be analysed repeatedly - time-consuming!
+
+*JVM (Java Virtual Machine) is a program which accepts and runs Java bytecode on computers. The Sun's official implementation of JVM is mostly written in C/C++.*
+
 ## Assignment 
 
 * [Assignment 2](../assets/week2/embedded_assignment_2.pdf)
+
