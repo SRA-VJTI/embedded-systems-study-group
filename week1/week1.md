@@ -239,8 +239,7 @@ The net list is an important document that the designer uses to layout the compo
 
 ### 3. Component Placement
 
-![Component Placement](https://i0.wp.com/www.autodesk.com/products/eagle/blog/wp-content/uploads/2017/03/component-placement-final.png?resize=891%2C690&ssl=1
-) 
+![Component Placement](https://content.instructables.com/ORIG/FI3/2N7C/J1WEQNJ3/FI32N7CJ1WEQNJ3.jpg?auto=webp&crop=1.2%3A1&frame=1&width=600) 
 
 The designer must carefully select the correct footprint, as a component may be available in several forms such as through-hole and surface mount types.
 The designer must place each component such that it can function properly either within the specified boundary of the PCB or within a minimum area.
