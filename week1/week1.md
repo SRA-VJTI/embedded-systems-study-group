@@ -1,24 +1,22 @@
-#  Embedded Systems Study Group
+  Embedded Systems Study Group
 
 - [Basic of Electronics](#basics-of-electronics)
-    - [Resistance](#resistance)
-     - [Basic Electronic Components](#basic-electronic-components)
-            + [Resistor](#resistor)
-            + [Capacitor](#capacitors)
-            + [Diodes](#diodes)
-            + [Inductors](#Inductors)
-            + [Integrated Circuits](#integrated-circuits)
-            + [Potentiometer](#potentiometers)
-            + [Transistors](#transistors) 
-            + [MOSFET](#mosfet)
-            + [BJT vs MOSFET](#bjt-vs-mosfet)
-            + [Switch debouncer](#switch-debouncer)
-            + [Pull up and Pull Down Resistor](#pull-up-and-pull-down-resistor)
-            + [Latches and Flipflops](#flipflops-and-latches)
-
+    - [Resistance](#resistance) 
+    - [Resistor](#resistor)
+    - [Capacitor](#capacitor)
+    - [Diodes](#diodes)
+    - [Inductors](#inductors)
+    - [Integrated Circuits](#integrated-circuits)
+    - [Potentiometer](#potentiometers)
+    - [Transistors](#transistors) 
+    - [MOSFET](#mosfet)
+    - [BJT vs MOSFET](#bjt-vs-mosfet)
+    - [Switch debouncer](#switch-debouncer)
+    - [Pull up and Pull Down Resistor](#pull-up-and-pull-down-resistor)
+    - [Latches and Flipflops](#flipflops-and-latches)
            
 - [Measurement Instruments](#measurement-instruments)
-    - [Digital Multimeter (DMM)](#digital-multimeter)
+    - [Digital Multimeter](#digital-multimeter)
     - [Oscilloscope](#oscilloscope)
 
 - [PCB Designing](#pcb-designing)
@@ -76,27 +74,28 @@ Also note that a **switch does not add any resistance** to a circuit and simply 
 - In simple terms, it works as a small rechargeable battery that stores electricity.<br/> However, unlike a battery, it can charge and discharge in the split of a second. You can think of it as a water storage tank that releases water when there is a drought to ensure a steady stream.
 
 #### Charging of a Capacitor
-![Charging](https://thumbs.gfycat.com/VeneratedShadyDinosaur-mobile.mp4)
+
+![Charging](https://thumbs.gfycat.com/VeneratedShadyDinosaur-size_restricted.gif)
 
 #### Discharging of a Capacitor
-![Discharging](https://thumbs.gfycat.com/WhoppingLinearIridescentshark-mobile.mp4)
+![Discharging](https://thumbs.gfycat.com/WhoppingLinearIridescentshark-size_restricted.gif)
 ### Types
 - The most commonly encountered types of capacitors are **ceramic disc capacitors** that look like tiny M&Ms with two wires sticking out of them <br/>and **electrolytic capacitors** that look more like small cylindrical tubes with two wires coming out the bottom.
 
-    1. **Ceramic Disc Capacitors** <br/>
-      - Are non-polarized, <br/>meaning that electricity can pass through them no matter how they are inserted in the circuit.
-      - They are typically marked with a number code which needs to be decoded. Instructions for reading ceramic capacitors can be found here. 
-      - This type of capacitor is typically represented in a schematic as two parallel lines.
-      - Mainly used for noise filtering or decoupling in power supplies.
-      - Ceramic capacitor can be used in AC circuits as well as DC circuits.
-      - Ceramic capacitors are widely in high frequency applications, in resonant circuits in transmitter stations, in power circuit breakers, induction furnaces, as MLCC in PCBs, etc.
+1. **Ceramic Disc Capacitors**
+    - Are non-polarized, <br/>meaning that electricity can pass through them no matter how they are inserted in the circuit.
+    - They are typically marked with a number code which needs to be decoded. Instructions for reading ceramic capacitors can be found here. 
+    - This type of capacitor is typically represented in a schematic as two parallel lines.
+    - Ceramic capacitor can be used in AC circuits as well as DC circuits.
+    - Ceramic capacitors are widely in high frequency applications, in resonant circuits in transmitter stations, in power circuit breakers, induction furnaces, as   MLCC in PCBs, etc.
 
-    2. **Electrolytic Capacitors** 
-      - Are typically polarized, <br/>meaning that one leg needs to be connected to the ground side of the circuit and the other leg must be connected to power. If it is connected backwards, it won't work correctly. 
-      - Electrolytic capacitors have the value written on them, typically represented in uF. They also mark the leg which connects to ground with a minus symbol (-). 
-      - This capacitor is represented in a schematic as a side-by-side straight and curved line. <br/>The straight line represents the end which connects to power and the curve connected to ground.
-      - Electrolytic capacitor cannot be used in AC circuit. It can be used in DC circuits only.
-      - The common applications of electrolytic capacitors are: to reduce voltage fluctuations, used for noise filtering, for smoothing the rectified AC, in audio frequency amplifiers, etc.
+2. **Electrolytic Capacitors** 
+
+    - Are typically polarized, <br/>meaning that one leg needs to be connected to the ground side of the circuit and the other leg must be connected to power. If it is connected backwards, it won't work correctly. 
+    - Electrolytic capacitors have the value written on them, typically represented in uF. They also mark the leg which connects to ground with a minus symbol (-). 
+    - This capacitor is represented in a schematic as a side-by-side straight and curved line. <br/>The straight line represents the end which connects to power and the cur    ve connected to ground.
+    - Electrolytic capacitor cannot be used in AC circuit. It can be used in DC circuits only.
+    - The common applications of electrolytic capacitors are: to reduce voltage fluctuations, used for noise filtering, for smoothing the rectified AC, in audio frequency amplifiers, etc.
 
 ### How is it measured?
 - Capacitors are measured in Farads. 
@@ -380,6 +379,30 @@ MOSFETs are basically classified in to two forms. They are:<br/>
 - The channel is formed between the drain and source in the opposite type to the substrate, such as N-channel is made with a P-type substrate and P-channel is made with an N-type substrate.
 -  The conductivity of the channel due to electrons or holes depends on N-type or P-type channel respectively.
 
+### Application of MOSFET
+
+- Mosfet is used for some switching applications an in electronics device.
+- It is used in some amplifying circuits.
+- MOSFET can be used as a high-frequency amplifier.
+- It can be used in voltage regulator circuits.
+- It is used as an inverter in some of the electronics circuits.
+- It can be used as a passive element e.g. resistor, inductor used in a circuit.
+- It is used in SMPS ( switch mode power supply ).
+- It is used in some DC brushless motor drives.
+- It is used in DC relay in electronics.
+- It can be used in digital circuits
+
+### MOSFET application as a Switch
+
+- As above we saw there are two types of MOSFET. Here we know the application of MOSFET using Enhancement type MOSFET. 
+- In this circuit, we are using enhancement mode, an N-channel MOSFET is being used to switch the LED or LAMP for ON and OFF. 
+
+![](https://pnpntransistor.com/wp-content/uploads/2018/09/MOSFET-as-a-Switch-1.jpg)
+
+- The voltage is applied at the gate of the MOSFET at that condition the lamp is ON. 
+- When the zero voltage level is applied at the gate then the device and lamp is turned off (VGS=0. 
+- So by this way, we can use MOSFET for switching operation. And MOSFET has a very high switching device.
+
 ## BJT vs MOSFET 
 
 | Parameter | BJT | MOSFET |
@@ -398,85 +421,89 @@ MOSFETs are basically classified in to two forms. They are:<br/>
 | Applications | BJT is preferred for the low current applications. It is widely used as amplifiers, oscillators and electronic switches.| MOSFET is suitable for high power applications. It is used in power supplies, etc.
 
 
-- ### Switch Debouncer:
-    <p align="center">
-        <img width="460" height="300" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/switch_debouncer.png">
-    </p>
+### Switch Debouncer:
 
-    - Switch Debounce waveform:
-    <p align="center">
-        <img width="460" height="300" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/debounce_waveform.jpeg">
-    </p>
+<p align="center">
+    <img width="460" height="300" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/switch_debouncer.png">
+</p>
 
-    - Hardware solution:
+#### Switch Debounce waveform:
 
-    ![](https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/hardware_bounce.gif)
+<p align="center">
+    <img width="460" height="300" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/debounce_waveform.jpeg">
+</p>
 
-- ### Pull-Up and Pull-Down Resistor:
-    - Pull-up and Pull-Down Resistors used in digital systems. 
-    - In a digital system, there are three states:
-    <p align="center">
-        <img width="460" height="300" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/states.png">
-    </p>
+#### Hardware solution:
+![](https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/hardware_bounce.gif)
 
-    -  Two obvious states are Logic High and Logic Low. But suppose if we left any pin unconnected/floating then it is said to be tristate or unknown.
-    - Example of this in popular 7432 OR gate IC's datasheet:
-    <p align="center">
-        <img width="500" height="184" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/datasheet_7432.png">
-    </p>
+### Pull-Up and Pull-Down Resistor:
+- Pull-up and Pull-Down Resistors used in digital systems. 
+- In a digital system, there are three states:
+<p align="center">
+    <img width="460" height="300" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/states.png">
+</p>
+
+-  Two obvious states are Logic High and Logic Low. But suppose if we left any pin unconnected/floating then it is said to be tristate or unknown.
+- Example of this in popular 7432 OR gate IC's datasheet:
+<p align="center">
+    <img width="500" height="184" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/datasheet_7432.png">
+</p>
     
-    - Range [2V - 5V]: considered as Logic HIGH.
-    - Range [0 - 0.8V]: considered as Logic LOW.
-    - Range [0.8 - 2V]: considered as indeterminate state.
-    <p align="center">
-        <img width="177" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/ttl_level.jpeg">
-    </p>
+- Range [2V - 5V]: considered as Logic HIGH.
+- Range [0 - 0.8V]: considered as Logic LOW.
+- Range [0.8 - 2V]: considered as indeterminate state.
 
-    - If we try to measure simple digital input of a micro-controller without any precaution for this unknown state then input signal will look like this:
-    <p align="center">
-        <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/without_pullup.gif">
-    </p>
+<p align="center">
+    <img width="177" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/ttl_level.jpeg">
+</p>
+
+- If we try to measure simple digital input of a micro-controller without any precaution for this unknown state then input signal will look like this:
+<p align="center">
+    <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/without_pullup.gif">
+</p>
     
-    - But if we connect a pull-up resistor at the input of micro-controller then input signal will look something like this:
-    <p align="center">
-        <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/with_pullup.gif">
-    </p>
+- But if we connect a pull-up resistor at the input of micro-controller then input signal will look something like this:
+<p align="center">
+    <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/with_pullup.gif">
+</p>
 
 
-- ### FlipFlops and Latches:
-    - FlipFlops and Latches are the building blocks of most sequential circuits. FlipFlop is a device that samples it's input and changes only when a clock signal changes. On the other hand latches are sequential devices that watch it's inputs continuously and can change its outputs at any time.
-    - ### Latches
-     - SR Latch
-      - There are 2 types of SR latches depending on the  gates used :-
-            
-                1) SR Latch ( with NOR gates )
-                <p align="center">
-                    <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/SRNorLatch.PNG">
-                </p>
+### FlipFlops and Latches:
+- FlipFlops and Latches are the building blocks of most sequential circuits. FlipFlop is a device that samples it's input and changes only when a clock signal changes. On the other hand latches are sequential devices that watch it's inputs continuously and can change its outputs at any time.
+#### Latches
+- SR Latch
+    - There are 2 types of SR latches depending on the  gates used :-        
+     1) SR Latch ( with NOR gates )
+     <p align="center">
+         <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/SRNorLatch.PNG">
+     </p>
 
-                2) SR Latch ( with NAND gates )
-                <p align="center">
-                    <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/SRNandLatch.png">
-                </p>
+     2) SR Latch ( with NAND gates )
+     <p align="center">
+          <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/SRNandLatch.png">
+     </p>
      
-     - ### FlipFlops
-      - SR FlipFlop
-            - One extra signal is used here and it is a control     signal like the clock signal.
-            <p align="center">
-                <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/SRFlipFlop.jpg">
-            </p>
-       - D FlipFlop
-        - What if we go into the invalid state by mistake???    The data will be lost and we do not want that.  
-            We can see that if we make S and R complements of each other then the invalid state is removed. That is a problem as we can't access the S=0 and R=0 state i.e the memory state. What can you do?  
-            Actually this is not a problem as you have clock signal. If you make the clock signal 0 then you automaticaly go into memory state.
+### FlipFlops
 
-            <p align="center">
-                <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/DFlipFlop.gif">
-            </p>
+#### SR FlipFlop
+- One extra signal is used here and it is a control     signal like the clock signal.
+<p align="center">
+    <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/SRFlipFlop.jpg">
+</p>
+
+#### D FlipFlop
+- **What if we go into the invalid state by mistake???**   <br/> The data will be lost and we do not want that.  
+<br/> We can see that if we make S and R complements of each other then the invalid state is removed. That is a problem as we can't access the S=0 and R=0 state i.e the memory state. 
+<br/>**What can you do?**
+Actually this is not a problem as you have clock signal. If you make the clock signal 0 then you automaticaly go into memory state.
+
+<p align="center">
+    <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/DFlipFlop.gif">
+</p>
 
 # Measurement Instruments:
 
-##  Digital Multimeter (DMM)
+##  Digital Multimeter
 
 ### Manual:
 
@@ -566,6 +593,8 @@ MOSFETs are basically classified in to two forms. They are:<br/>
 
 
 Oscilloscope is a powerful tool used to visualize signals, waveforms as a function of time. It can be used to analyze frequency, amplitude, rise time, time interval and distortions of signals.
+
+[Do check out this link on how to use an Oscilloscope!](https://www.youtube.com/embed/u4zyptPLlJI)
 
 #### Functions:
 
@@ -712,7 +741,7 @@ After completion of the schematic design, the software module offers two outputs
 ### 3. Component Placement
 
 <p>
-    <img width="500" src="https://i0.wp.com/www.autodesk.com/products/eagle/blog/wp-content/uploads/2017/03/component-placement-final.png?resize=891%2C690&ssl=1">
+    <img width="500" src="https://s18798.pcdn.co/samanthazhang/wp-content/uploads/sites/17496/2020/05/%E6%88%AA%E5%B1%8F2020-04-23%E4%B8%8B%E5%8D%8811.17.52.png">
 <p/>
 
 
