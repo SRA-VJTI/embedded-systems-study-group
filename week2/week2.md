@@ -7,16 +7,20 @@
 			- [Compiling](#compiling)
 			- [Assembly](#assembly)
 			- [Linking](#linking)
+		- [Cross Compilation](#cross-compilation)
 		- [Header files](#header-files)
 		- [Object and source files in C: .o and .c](#object-and-source-files-in-c-o-and-c)
 		- [Brief overview of GNU Make and CMake build systems](#brief-overview-of-gnu-make-and-cmake-build-systems)
 			- [GNU Make](#gnu-make)
 			- [Ninja](#ninja)
+				- [Basic specifications :](#basic-specifications-)
+			- [Note :](#note-)
 			- [CMake](#cmake)
 		- [Memory allocation in C](#memory-allocation-in-c)
 			- [Static](#static)
 			- [Automatic](#automatic)
 			- [Dynamic](#dynamic)
+	- [Basics of Interpreter](#basics-of-interpreter)
 	- [Assignment](#assignment)
 
 ## Basics of Embedded Programming
@@ -208,6 +212,12 @@ In layman terms, gcc does something very smart, since there can be thousands of 
 So, in the above program we only have a single .c file then why did we need to link it, reason being, we have used stdio, which has printf function, this function is defined in some source file somewhere in the system, so to use printf we need to link the object file of that source file with ours. We do so by using the following command, inshort compile it using gcc, inshort generates a binary executable: `gcc main.o -o main`
 
 Now, we can run the generated binary: `./main` and then output will be `23`.
+
+### Cross Compilation
+
+- A cross-compiler is a tool that transforms source code into object code that will run on a machine other than the one where the compilation was executed.
+- For example, a compiler that runs on a PC but generates code that runs on Android smartphone is a cross compiler.
+- Embedded computers where a device has extremely limited resources. For example, a microwave oven will have an extremely small computer to read its keypad and door sensor, provide output to a digital display and speaker, and to control the machinery for cooking food. This computer is generally not powerful enough to run a compiler, a file system, or a development environment. So cross compiled binaries can be flashed on the system.
 
 ### Header files
 
@@ -617,6 +627,22 @@ For example, if you want to allocate dynamically some space to hold a struct foo
 }
 ```
 
+## Basics of Interpreter
+
+- Interpreter is a computer program that directly executes instructions written in a programming or scripting language, without requiring them previously to have been compiled into a machine language program.
+- An interpreter generally uses one of the following strategies for program execution:
+
+	- Parse the source code and perform its behavior directly. Ex:- dBASE and BASIC
+    - Translate source code into some efficient intermediate representation or object code (ex bytecode) and immediately execute that. Ex:- Java
+
+- Interpreting a program is much slower than executing native machine code
+- Interpreting a high-level language is ~100 times slower
+Interpreting an intermediate-level (such as JVM bytecode) language is ~10 slower
+- If an instruction is called repeatedly, it will be analysed repeatedly - time-consuming!
+
+*JVM (Java Virtual Machine) is a program which accepts and runs Java bytecode on computers. The Sun's official implementation of JVM is mostly written in C/C++.*
+
 ## Assignment 
 
 * [Assignment 2](../assets/week2/embedded_assignment_2.pdf)
+
