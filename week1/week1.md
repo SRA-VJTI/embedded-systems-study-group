@@ -38,8 +38,6 @@ Before having hands on circuits,
 <br/>**'Shorts are bad because they will result in your battery and/or circuit overheating, breaking, catching on fire, and/or exploding.**
 <br/>It is very important to prevent short circuits by making sure that the **positive voltage is never wired directly to ground.'**
 
-That said, always keep in mind that 
->Electricity always follows the path of least resistance to ground.
 
 Also note that a **switch does not add any resistance** to a circuit and simply adding a switch between power and ground will create a short circuit.
 
@@ -501,6 +499,70 @@ Actually this is not a problem as you have clock signal. If you make the clock s
     <img width="540" height="260" src="https://github.com/SRA-VJTI/embedded-systems-study-group/raw/master/assets/week1/DFlipFlop.gif">
 </p>
 
+### DC-DC Converters
+
+#### Buck Converter
+The Buck Converter is used in SMPS circuits where the DC output voltage needs to be lower than the DC input voltage. The DC input can be derived from rectified AC or from any DC supply. 
+
+<p align="center">
+    <img width="540" height="260" src="https://electronicscoach.com/wp-content/uploads/2021/09/circuit-of-buck-converter.jpg">
+</p>
+
+In the above figure, it is clearly shown that along with the power electronics solid-state device which acts as a switch for the circuit, there is another switch in the circuit which is a freewheeling diode. The combination of these two switches forms a connection with a low-pass LC filter in order to reduce current or voltage ripples. This helps in generating regulated dc output. A pure resistor is connected across this whole arrangement that acts as a load of the circuit.
+
+The whole operation of the circuit takes place in two modes. The first mode is the one when the power MOSFET i.e., switch S1 is closed.
+
+ ##### Switch S1 closed
+In this mode of operation, switch S1 is in closed condition thus allows the flow of current to take place through it.
+
+<p align="center">
+    <img width="540" height="260" src="https://electronicscoach.com/wp-content/uploads/2021/09/buck-converter-switch-1-closed-condition.jpg">
+</p>
+
+Initially when a fixed dc voltage is applied across the input terminal of the circuit then in the closed condition of switch S1 current flows in the circuit in the manner shown above. Due to this flowing current, the inductor in the path stores energy in the form of a magnetic field. Also, there is a capacitor in the circuit and current flows through it also, therefore, it will store the charge and the voltage across it will appear across the load.
+
+However, due to Lenz’s law, the energy stored within the inductor will oppose the cause which has produced it and so an induced current will get generated and the polarity across the inductor will get reversed.
+
+##### Switch S1 opened
+
+<p align="center">
+    <img width="540" height="260" src="https://electronicscoach.com/wp-content/uploads/2021/09/buck-converter-switch-2-closed-condition-1.jpg">
+</p>
+
+Now, the second mode of operation takes place when switch S2 is closed and S1 gets open. However, you must be thinking about how automatically, the switch S2 will be closed. So, as we have discussed that the inductor in the circuit will store the energy so, once S1 will get open the inductor in the circuit will start acting as the source.
+In this mode, the inductor releases the energy which is stored in the previous mode of operation. As we have discussed that the polarity of the inductor will get reversed therefore this causes the freewheeling diode to come in a forward-biased state which was earlier present in a reverse-biased state due to the applied dc input.
+
+This flow of current will take place till the time the stored energy within the inductor gets completely collapsed. As once the inductor gets completely discharged, the diode comes in reverse biased condition leading to cause opening of switch S2, and instantly switch S1 will get closed and the cycle continues.
+
+#### Boost Converter
+
+Boost converters generate an output voltage that is higher than the supplied input.
+
+<p align="center">
+    <img width="540" height="260" src="https://electronicscoach.com/wp-content/uploads/2021/09/circuit-of-boost-converter.jpg">
+</p>
+
+The circuit here is an elementary form of step-up chopper which necessarily requires a large inductor L in series connection with the voltage source. The whole circuit arrangement operates in a way that it helps in maintaining a regulated dc signal at the output.
+
+##### Switch is closed
+
+<p align="center">
+    <img width="540" height="260" src="https://electronicscoach.com/wp-content/uploads/2021/09/mode-1-operation-of-boost-converter.jpg">
+</p>
+
+Initially, when the chopper CH is in on state, then in the presence of supply dc input current begins to flow through the closed path of the circuit i.e., passing through the inductor as shown in the figure. 
+
+Here, the polarity of the inductor will be according to the direction of the flow of current. In this particular case, the diode in the configuration is in reverse biased condition and so current will not be allowed to flow through that particular part of the circuit during on state of the chopper. Resultantly, the voltage across the chopper will appear across the load.
+
+##### Switch is opened
+
+<p align="center">
+    <img width="540" height="260" src="https://electronicscoach.com/wp-content/uploads/2021/09/mode-2-operation-of-boost-converter.jpg">
+</p>
+
+Furthermore, at the instant when CH is in the off state, then the part of the circuit through which the current was flowing earlier will not be active in this case. However, as the inductor stores, the energy in the form of a magnetic field and so the current through it will not die out instantly.
+Also, we know according to Lenz’s law a reverse current will be induced that will oppose the cause which has produced it. And so, due to the induced current, the polarity of the inductor will get reversed. This reverse polarity of the inductor forward biases the diode present in the circuit. This provides the path for the current through the diode that flows through the load during the off state of the chopper i.e., Toff. However, we must note here that the current through the inductor is of decreasing nature and will die out after a point in time.
+
 # Measurement Instruments:
 
 ##  Digital Multimeter
@@ -769,3 +831,4 @@ After completion of the schematic design, the software module offers two outputs
 - Find out values of different SMD components on the SRA Board. 
 - Check continuity. 
 - Observe output waveform of the PWM signal on Oscilloscope.
+- Study about Buck-Boost converter. (2 in 1)
