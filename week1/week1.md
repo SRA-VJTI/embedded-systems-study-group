@@ -49,7 +49,7 @@ Also note that a **switch does not add any resistance** to a circuit and simply 
 
 <p>
     <img width="500" src="https://content.instructables.com/ORIG/FGN/I05P/GWDY31I9/FGNI05PGWDY31I9.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=68aa629b2cf89e3a430a5373997ce8f7">
-<p/>
+</p>
 
 ### What is it?
 
@@ -67,7 +67,7 @@ Also note that a **switch does not add any resistance** to a circuit and simply 
 ## Capacitor
 <p>
     <img width="500" src="https://content.instructables.com/ORIG/F00/SK40/GWDXZHOH/F00SK40GWDXZHOH.jpg?auto=webp&frame=1&width=933&height=1024&fit=bounds&md=8e91bb0c003cfedc29815e8008efb66a">
-<p/>
+</p>
 
 ### What is it?
 - A capacitor is a component that stores electricity and then discharges it into the circuit when there is a drop in electricity. 
@@ -75,10 +75,10 @@ Also note that a **switch does not add any resistance** to a circuit and simply 
 
 #### Charging of a Capacitor
 
-![Charging](https://thumbs.gfycat.com/VeneratedShadyDinosaur-size_restricted.gif)
+![Charging](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/imgele/capchg.png)
 
 #### Discharging of a Capacitor
-![Discharging](https://thumbs.gfycat.com/WhoppingLinearIridescentshark-size_restricted.gif)
+![Discharging](https://lh6.googleusercontent.com/proxy/XvQyLKVLHhirwJMVg6d4B9w0r1cBRbQN6gbtKIQwRjgnenCOfZAUBzzzuqRHmONfXVh0uISeG0xOQ35gmE06cip_r50tWJX8H06nytfcFZQc2rUfe47q5g)
 ### Types
 - The most commonly encountered types of capacitors are **ceramic disc capacitors** that look like tiny M&Ms with two wires sticking out of them <br/>and **electrolytic capacitors** that look more like small cylindrical tubes with two wires coming out the bottom.
 
@@ -113,7 +113,7 @@ Also note that a **switch does not add any resistance** to a circuit and simply 
 
 <p>
     <img width="500" src="https://content.instructables.com/ORIG/FL0/YF9A/GWDYTKHE/FL0YF9AGWDYTKHE.jpg?auto=webp&frame=1&width=933&height=1024&fit=bounds&md=e53469e3b59fccdafdbf79e8e2464269">
-<p/>
+</p>
 
 ### What is it?
 - Diodes are components which are polarized. <br/>They only allow electrical current to pass through them in one direction. 
@@ -137,7 +137,7 @@ Also note that a **switch does not add any resistance** to a circuit and simply 
 
 <p>
     <img width="500" src="https://lh4.googleusercontent.com/NwGEI-OIl0WQE2dhm9lFJPV7VlWXy0zxoHwjSFLX-c2Mnf96iTDRo5qvcFS_lDLUeKxI3U24pYrvdGOyaxnvK60Ut24XeAoFbTRnOWY-qxgv0KfPBtnSsXvauLPM8ip19qGe49WOKWE8Y09hXvRFNnXHUaEB-h4NRV6CMjxDdYYlG7EczakSNjoecICjLg">
-<p/>
+</p>
   
 
 Inductors are passive two-terminal electrical component that stores energy in a magnetic field.
@@ -164,7 +164,7 @@ Inductors are passive two-terminal electrical component that stores energy in a 
 
 <p>
     <img width="500" src="https://content.instructables.com/ORIG/FZV/9Y1E/GWDXZHP6/FZV9Y1EGWDXZHP6.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=20d732e88773a226ccdd6142632eb2d4">
-<p/>
+</p>
 
 ### What is it?
 
@@ -186,7 +186,7 @@ miniaturized and fit onto one small chip with each leg of the chip connecting to
 
 <p>
     <img width="500" src="https://content.instructables.com/ORIG/FW0/PEDF/GWDYTKTV/FW0PEDFGWDYTKTV.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=cee571cae812dc881571fdf5c74023cd">
-<p/>
+</p>
 
 ### What is it?
 - Potentiometers are variable resistors. 
@@ -207,7 +207,7 @@ miniaturized and fit onto one small chip with each leg of the chip connecting to
 
 <p>
     <img width="500" src="https://content.instructables.com/ORIG/FHI/R0V9/GWDYFV1R/FHIR0V9GWDYFV1R.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=c8a266eb71ab666854fc0b4011b4562a">
-<p/>
+</p>
 
 Easy way to remember these transistor symbols is that
 - PNP-Points In Permanently
@@ -223,7 +223,7 @@ Easy way to remember these transistor symbols is that
 
 <p>
     <img width="600" src="https://www.electronicshub.org/wp-content/uploads/2015/01/1.Transistor-tree.jpg">
-<p/>
+</p>
 
 ### Types of Junction Transistor
 
@@ -234,7 +234,7 @@ There are two basic types of transistors, which are **NPN** and **PNP**. These t
 - They are represented in a schematic with a line for a base, a diagonal line connecting to the base, and a diagonal arrow pointing away from the base.
 <p>
     <img width="500" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_761/https://www.allaboutelectronics.org/wp-content/uploads/2020/04/BJT_WB_1.png">
-<p/>
+</p>
 
 **PNP transistors** 
 - Allow electricity to pass from the emitter pin to the collector pin. 
@@ -242,19 +242,19 @@ There are two basic types of transistors, which are **NPN** and **PNP**. These t
 
 <p>
     <img width="500" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_717/https://www.allaboutelectronics.org/wp-content/uploads/2020/07/BJT_WB_2.png">
-<p/>
+</p>
 
 ### Transistor Configurations
 
 <p>
     <img width="500" src="https://d3jlfsfsyc6yvi.cloudfront.net/image/mw:1024/q:85/https%3A%2F%2Fhaygot.s3.amazonaws.com%3A443%2Fcheatsheet%2F16005.png">
-<p/>
+</p>
 
 ### Cut off, Active & Saturation Region of Transistor
 
 <p>
     <img width="500" src="https://1.bp.blogspot.com/-EouQElfaRkA/Xi79Jm496II/AAAAAAAACO0/sMcafbNV55cANSuwVtCAoydWJMXVzpmCQCLcBGAsYHQ/s640/cut%2Boff%252C%2Bsaturation%2Band%2Bactive%2Bregion.png">
-<p/>
+</p>
 
 **1. Cut-off region** <br/>
 - When load line intersect IB = 0, it is known as cut off region of the transistor. 
@@ -303,10 +303,10 @@ There are two basic types of transistors, which are **NPN** and **PNP**. These t
 <p>
     <img width="500" src="https://www.tutorialspoint.com/assets/questions/media/52545/cut_off_operation.jpg">
 
-<p/>
+</p>
 <p>
      <img width="500" src="https://www.tutorialspoint.com/assets/questions/media/52545/eq_open_sw.jpg">
-<p/>
+</p>
 
 When transistor operates in the cut off region shows the following characteristics 
 - The input is grounded i.e. at zero potential.
@@ -320,10 +320,10 @@ When transistor operates in the cut off region shows the following characteristi
 <p>
     <img width="500" src="https://www.tutorialspoint.com/assets/questions/media/52545/saturation_operation.jpg">
 
-<p/>
+</p>
 <p>
      <img width="500" src="https://www.tutorialspoint.com/assets/questions/media/52545/eq_close_sw.jpg">
-<p/>
+</p>
 
 The transistor operating in the saturation region exhibits following characteristics −
 - The input is connected to VCC.
@@ -345,7 +345,7 @@ The transistor operating in the saturation region exhibits following characteris
 
 <p>
     <img width="500" src="https://res.cloudinary.com/rs-designspark-live/image/upload/c_limit,w_643/f_auto/v1/article/What_is_mosfet_7e47df2da83b4a21b7ab68272f549aadf2c9957f">
-<p/>
+</p>
 
 MOSFETs also have three terminals, namely Drain (D), Source (S) and Gate (G) and also one more (optional) terminal called substrate or Body (B). 
 
@@ -361,7 +361,7 @@ MOSFETs are basically classified in to two forms. They are:<br/>
 - The depletion type of transistors requires gate – source voltage (VGS) to switch OFF the device.
 <p>
 <img width="500" src="https://www.electronicshub.org/wp-content/uploads/2021/04/Depletion-Mode-MOSFET-Symbols-1.png">
-<p/>
+</p>
 
 - In this type of MOSFETs a thin layer of silicon is deposited below the gate terminal. 
 - The depletion mode MOSFET transistors are generally ON at zero gate-source voltage (VGS). 
@@ -373,7 +373,7 @@ MOSFETs are basically classified in to two forms. They are:<br/>
 - The symbols of both N-channel and P-channel enhancement mode MOSFETs are shown below.
 <p>
     <img width="500" src="https://www.electronicshub.org/wp-content/uploads/2021/04/Enhancement-Mode-MOSFET-Symbols-1.png">
-<p/> 
+</p> 
 
 - Generally, this oxide layer is called as ‘Inversion layer’. 
 - The channel is formed between the drain and source in the opposite type to the substrate, such as N-channel is made with a P-type substrate and P-channel is made with an N-type substrate.
@@ -509,7 +509,7 @@ Actually this is not a problem as you have clock signal. If you make the clock s
 
 <p>
     <img width="500" src="https://i.pinimg.com/564x/d2/2c/b1/d22cb12b04a0c0db8385d69f5c514da5.jpg">
-<p/>
+</p>
 
 - In manual DMM you have to set the range of readings manually.
 
@@ -575,7 +575,7 @@ Actually this is not a problem as you have clock signal. If you make the clock s
 
 <p>
     <img width="500" src="https://www.gotronik.pl/images/ut136c-plus-multimetr1.jpg">
-<p/>
+</p>
 
 - In these multimeters, the user doesn’t need to set the range.
 
@@ -589,7 +589,7 @@ Actually this is not a problem as you have clock signal. If you make the clock s
 
  <p>
     <img width="600" src="https://www.electronicshub.org/wp-content/uploads/2021/12/Oscilloscope-Front-Panel.png">
- <p/>
+ </p>
 
 
 Oscilloscope is a powerful tool used to visualize signals, waveforms as a function of time. It can be used to analyze frequency, amplitude, rise time, time interval and distortions of signals.
@@ -658,7 +658,7 @@ the most commonly used have lower layer counts such as 4, 6, or 8 layer boards.
 
 <p>
     <img width="500" src="https://www.raypcb.com/wp-content/uploads/2021/05/DIP-soldering-PCB.jpg">
-<p/>
+</p>
 
 - A dual in-line kit is a digital part kit with a pyramid shape and the electrical connecting pins in two parallel rows. The product is installed or placed in a socket on a circuit board.
 
@@ -667,7 +667,7 @@ the most commonly used have lower layer counts such as 4, 6, or 8 layer boards.
 
 <p>
     <img width="500" src="https://www.ourpcb.com/wp-content/uploads/2019/03/1-1.jpg">
-<p/>
+</p>
 
 - Texture mounting technology (SMT) is a means by which electronic circuits are installed or positioned adsorbed on the surface of circuit boards such as PCBs. <br/>This is called the surface mounting system an electrical device SMD Service.
 
@@ -686,7 +686,7 @@ the most commonly used have lower layer counts such as 4, 6, or 8 layer boards.
 
 <p>
     <img width="500" src="https://www.kicad.org/img/frontpage/kicad_eeschema.png">
-<p/>
+</p>
 
 **KiCad's Schematic Editor** 
 
@@ -697,7 +697,7 @@ the most commonly used have lower layer counts such as 4, 6, or 8 layer boards.
 
 <p>
     <img width="500" src="https://www.kicad.org/img/frontpage/kicad_pcbnew.png">
-<p/>
+</p>
 
 **KiCad's PCB Editor** 
 - Is approachable enough to make your first PCB design easy, and powerful enough for complex modern designs. A powerful interactive router and improved visualization and selection tools make layout tasks easier than ever.
@@ -706,7 +706,7 @@ the most commonly used have lower layer counts such as 4, 6, or 8 layer boards.
 
 <p>
     <img width="500" src="https://www.kicad.org/img/frontpage/kicad_3dviewer.png"> 
-<p/>
+</p>
 
 **KiCad's 3D Viewer** 
 - Allows easy inspection of your PCB to check mechanical fit and to preview your finished product. A built-in raytracer with customizable lighting can create realistic images to show off your work.
@@ -723,7 +723,7 @@ The process flow for designing a PCB shows four major steps:
 
 <p>
     <img width="500" src="https://makerobot.files.wordpress.com/2013/01/sss3.png?w=584">
-<p/>
+</p>
 
 - In the next stage, the designer draws the circuit and creates an orderly schematic that represents the logical functioning of the circuit. 
 - The software module handling the schematic drawing assigns individual part numbers to each component and interprets the interconnections to and from their pins as part of a net. The designer must assign a valid footprint to each part in the schematic.
@@ -742,7 +742,7 @@ After completion of the schematic design, the software module offers two outputs
 
 <p>
     <img width="500" src="https://s18798.pcdn.co/samanthazhang/wp-content/uploads/sites/17496/2020/05/%E6%88%AA%E5%B1%8F2020-04-23%E4%B8%8B%E5%8D%8811.17.52.png">
-<p/>
+</p>
 
 
 - The designer must carefully select the correct footprint, as a component may be available in several forms such as through-hole and surface mount types.
@@ -752,7 +752,7 @@ After completion of the schematic design, the software module offers two outputs
 
 <p>
     <img width="500" src="https://cdn-blog.adafruit.com/uploads/2016/11/F8B5NG4IVA54AHJ.LARGE_.jpg">
-<p/>
+</p>
 
 
 - In the final stage, the designer invokes the routing module of the CAD package. <br/>This module usually has two parts— **the auto-router** and the **manual router**. 
